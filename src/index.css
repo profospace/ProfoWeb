@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body{
+
+}
+
+.container{
+  padding: 1rem 1.5rem;
+}
+
+.slider-container {
+  overflow: visible;
+}
+
