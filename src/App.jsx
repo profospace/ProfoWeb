@@ -8,6 +8,8 @@ const About = lazy(() => import('./pages/About'));
 /* Layout Component */
 import Layout from './components/Layout';
 import FloatButtonShowMap from './components/FloatButtonShowMap'
+import SinglePage from './pages/SinglePage';
+import Gallery from './pages/Gallery';
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path='/about' element={<About />} />
+            <Route path='/detail' element={<SinglePage />} />
+            <Route path='/gallery' element={<Gallery />} />
           </Route>
         </Routes>
     </div>

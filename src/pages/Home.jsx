@@ -51,10 +51,10 @@ const dummyProducts = [
 
 function Home() {
     return (
-        <div className="w-full h-full shadow-md bg-white">
+        <div className="w-full h-full bg-white">
             <FiltersSection />
             <LocationAccessPopup />
-            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-12 p-6">
+            <div className="grid gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {dummyProducts.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
