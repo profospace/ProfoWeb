@@ -1,41 +1,47 @@
-import React from "react";
+import React from 'react';
+import Gallery from 'react-photo-gallery';
+
+// Dummy data for testing with random size images
 const images = [
-    "/assets/img1.avif", // Landscape
-    "/assets/img2.avif", // Landscape
-    "/assets/img3.avif", // Landscape
-    "https://via.placeholder.com/600x800", // Portrait
-    "https://via.placeholder.com/1200x500", // Wide
-    "https://via.placeholder.com/400x400", // Square
-    "https://via.placeholder.com/700x1000", // Portrait
-    "https://via.placeholder.com/1000x700", // Landscape
-    "https://via.placeholder.com/800x800", // Square
-    "https://via.placeholder.com/500x1200", // Tall
-    "https://via.placeholder.com/1200x800", // Landscape
-    "https://via.placeholder.com/900x600", // Landscape
+    {
+        src: 'https://via.placeholder.com/800x600',
+        width: 4,
+        height: 3,
+        alt: 'Image 1',
+    },
+    {
+        src: 'https://via.placeholder.com/600x800',
+        width: 3,
+        height: 4,
+        alt: 'Image 2',
+    },
+    {
+        src: '/assets/img1.avif',
+        width: 2,
+        height: 1,
+        alt: 'Image 3',
+    },
+    {
+        src: 'https://via.placeholder.com/800x800',
+        width: 1,
+        height: 1,
+        alt: 'Image 4',
+    },
+    {
+        src: '/assets/img2.avif',
+        width: 2,
+        height: 1,
+        alt: 'Image 5',
+    }
 ];
 
-const Gallery = () => {
+const GalleryComponent = () => {
     return (
         <div className="container mx-auto p-4">
-            <div
-                className="flex gap-10 flex-wrap"
-                style={{ gridAutoRows: "200px" }} // Adjust for auto-resized rows
-            >
-                {images.map((image, index) => (
-                    <div
-                        key={index}
-                        className="relative overflow-hidden rounded-lg shadow-md"
-                    >
-                        <img
-                            src={image}
-                            alt={`Gallery Image ${index}`}
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                ))}
-            </div>
+            <h2 className="text-xl font-semibold mb-6 text-center">Image Gallery</h2>
+            <Gallery photos={images} />
         </div>
     );
 };
 
-export default Gallery;
+export default GalleryComponent;
