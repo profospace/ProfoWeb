@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Button } from "@material-tailwind/react";
 import "swiper/css";
 import { PiDotsNineBold } from "react-icons/pi";
+import { CarouselImages } from "../components/CarousalImages";
 
 const SinglePage = () => {
     const images = [
@@ -40,7 +41,7 @@ const SinglePage = () => {
                 <div className="hidden lg:grid grid-cols-2 gap-4 items-center ">
                     {/* Full Height Box on the Left */}
                     <div className="bg-gray-200 flex items-center justify-center text-2xl font-bold rounded-lg shadow-md h-full">
-                        Full Box
+                        <CarouselImages />  {/* Set of images for carousal */}
                     </div>
 
                     {/* 2x2 Grid on the Right */}
