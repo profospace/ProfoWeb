@@ -65,14 +65,16 @@ function FiltersSection() {
     { icon: <TbBed size={30} />, text: "Rooms" },
   ];
   return (
+      <div className='shadow-sm px-8 py-2'>
       <Slider {...settings}>
         {filterData.map((item, index) => (
-          <div key={index} className="grid place-items-center">
-            <div className="rounded-full bg-gray-100">{item.icon}</div>
+          <div key={index} className="grid place-items-center px-2 py-2 mx-2 cursor-pointer">
+            <div className="rounded-full w-16 h-10 grid place-items-center bg-gray-100">{item.icon}</div>
             <div className="text-sm font-medium">{item.text}</div>
           </div>
         ))}
       </Slider>
+      </div>
 
   )
 }
