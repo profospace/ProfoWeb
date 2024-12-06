@@ -1,5 +1,6 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { SearchComponent } from './SearchComponent'
 
 const navigation = [
     { name: 'Dashboard', href: '#', current: true },
@@ -51,6 +52,10 @@ export default function Navbar() {
                                 ))}
                             </div>
                         </div>
+                    </div>
+                    {/* Input search component */}
+                    <div>
+                        <SearchComponent />
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <button
