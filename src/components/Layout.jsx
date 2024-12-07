@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import Navbar from './Navbar'
 import Footer from '../components/Footer'
 import LoadingPage from './LoadingPage'
+import FiltersSection from "../components/FiltersSection";
 
 
 function Layout() {
@@ -10,6 +11,7 @@ function Layout() {
 
         <>
             <Navbar />
+            <FiltersSection />
             <Suspense fallback={<LoadingPage />}>
                 <Outlet />
             <Footer />

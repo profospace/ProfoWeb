@@ -1,5 +1,4 @@
 import React from "react";
-import FiltersSection from "../components/FiltersSection";
 import PopupLocation from "../components/PopupLocation";
 import LocationAccessPopup from "../components/LocationAccessPopup";
 import ProductCard from "../components/ProductCard";
@@ -52,13 +51,19 @@ const dummyProducts = [
 function Home() {
     return (
         <div className="w-full h-full bg-white">
-            <FiltersSection />
+            
             <LocationAccessPopup />
-            <div className="grid gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {/* <div className="grid gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 flex-wrap">
+                {dummyProducts.map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                ))}
+            </div> */}
+            <div className="grid gap-6 p-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
                 {dummyProducts.map((product) => (
                     <ProductCard key={product.id} product={product} />
                 ))}
             </div>
+
         </div>
     );
 }

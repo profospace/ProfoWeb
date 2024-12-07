@@ -65,7 +65,7 @@ function FiltersSection() {
     { icon: <TbBed size={30} />, text: "Rooms" },
   ];
   return (
-      <div className='shadow-sm px-8 py-2'>
+    <div className='filters-section shadow-lg px-8 py-2'>
       <Slider {...settings}>
         {filterData.map((item, index) => (
           <div key={index} className="grid place-items-center px-2 py-2 mx-2 cursor-pointer">
