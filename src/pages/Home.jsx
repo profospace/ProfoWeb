@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PopupLocation from "../components/PopupLocation";
 import LocationAccessPopup from "../components/LocationAccessPopup";
 import ProductCard from "../components/ProductCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProperties } from "../redux/features/Properties/propertiesSlice";
 
 const dummyProducts = [
     {
@@ -49,6 +51,15 @@ const dummyProducts = [
 
 
 function Home() {
+    const dispatch = useDispatch()
+    const {properties} = useSelector(state=>state.properties)
+    console.log(properties)
+
+    useEffect(
+        ()=>{
+            dispatch(getAllProperties())
+        },[]
+    )
     return (
         <div className="w-full h-full bg-white">
             
@@ -59,8 +70,8 @@ function Home() {
                 ))}
             </div> */}
             <div className="grid gap-6 p-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
-                {dummyProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
+                {properties?.map((property) => (
+                    <ProductCard key={property._id} property={property} />
                 ))}
             </div>
 

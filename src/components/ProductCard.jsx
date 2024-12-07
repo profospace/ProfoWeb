@@ -7,6 +7,8 @@ import "swiper/css/navigation";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
+import { Badge, Card, Space } from 'antd';
+
 // const ProductCard = ({ product }) => {
 //     const [swiperInstance, setSwiperInstance] = useState(null);
 //     const [currentIndex, setCurrentIndex] = useState(0);
@@ -72,7 +74,7 @@ import { IoIosArrowForward } from "react-icons/io";
 //     );
 // };
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ property }) => {
     const [swiperInstance, setSwiperInstance] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -87,8 +89,8 @@ const ProductCard = ({ product }) => {
     }, [currentIndex, swiperInstance]);
 
     return (
-        <div className="bg-white shadow-lg rounded-md p-2 mx-auto group relative max-w-[90%] sm:max-w-[20rem] md:max-w-[22rem] lg:max-w-[18rem]">
-            <Swiper
+        <div className="bg-white shadow-lg rounded-md p-2 mx-auto group relative w-72 sm:max-w-[20rem] md:max-w-[22rem] lg:max-w-[18rem] border-slate-200 hover:border-slate-300 hover:shadow-md">
+            {/* <Swiper
                 pagination={{ clickable: true }}
                 navigation={{
                     nextEl: ".custom-next",
@@ -99,12 +101,12 @@ const ProductCard = ({ product }) => {
                 modules={[Navigation, Pagination]}
                 className="relative"
             >
-                {product.images.map((image, index) => (
+                {property?.galleryList?.map((image, index) => (
                     <SwiperSlide key={index}>
                         <img
                             src={image}
                             alt={`Product ${index}`}
-                            className="rounded-md w-full min-h-60 object-cover"
+                            className="rounded-md w-full min-h-60 max-h-60 min-w-60 object-contain"
                         />
                     </SwiperSlide>
                 ))}
@@ -116,7 +118,7 @@ const ProductCard = ({ product }) => {
                         <IoIosArrowBack />
                     </button>
                 )}
-                {currentIndex < product.images.length - 1 && (
+                {currentIndex < property?.galleryList?.length - 1 && (
                     <button
                         className="custom-next absolute top-1/2 right-2 transform -translate-y-1/2 bg-[rgba(0,0,0,0.1)] text-black hover:bg-white hover:scale-110 duration-150 ease-in-out p-1 rounded-full shadow opacity-0 group-hover:opacity-100"
                         onClick={() => swiperInstance?.slideNext()}
@@ -124,13 +126,67 @@ const ProductCard = ({ product }) => {
                         <IoIosArrowForward />
                     </button>
                 )}
-            </Swiper>
-            <div className="mt-4 py-2 px-1">
-                <h3 className="text-lg font-bold">{product.title}</h3>
-                <p className="text-gray-600 text-sm">{product.description}</p>
+            </Swiper> */}
+
+            <div className="">
+                {/* Conditional Badge Ribbon */}
+                {property?.verified && (
+                    <Badge.Ribbon
+                        text="Verified"
+                        color="green"
+                        className="z-10"
+                    />
+                )}
+                <div className="relative">
+                    {/* Swiper Gallery */}
+                    <Swiper
+                        pagination={{ clickable: true }}
+                        navigation={{
+                            nextEl: ".custom-next",
+                            prevEl: ".custom-prev",
+                        }}
+                        onSlideChange={handleSlideChange}
+                        onSwiper={setSwiperInstance}
+                        modules={[Navigation, Pagination]}
+                        className="relative z-0"
+                    >
+                        {property?.galleryList?.map((image, index) => (
+                            <SwiperSlide key={index}>
+                                <img
+                                    src={image}
+                                    alt={`Product ${index}`}
+                                    className="rounded-md w-full min-h-60 max-h-60 min-w-60 object-contain"
+                                />
+                            </SwiperSlide>
+                        ))}
+                        {currentIndex > 0 && (
+                            <button
+                                className="custom-prev absolute top-1/2 left-2 transform -translate-y-1/2 bg-[rgba(0,0,0,0.1)] text-black hover:bg-white hover:scale-110 duration-150 ease-in-out p-1 rounded-full shadow opacity-0 group-hover:opacity-100 z-10"
+                                onClick={() => swiperInstance?.slidePrev()}
+                            >
+                                <IoIosArrowBack />
+                            </button>
+                        )}
+                        {currentIndex < property?.galleryList?.length - 1 && (
+                            <button
+                                className="custom-next absolute top-1/2 right-2 transform -translate-y-1/2 bg-[rgba(0,0,0,0.1)] text-black hover:bg-white hover:scale-110 duration-150 ease-in-out p-1 rounded-full shadow opacity-0 group-hover:opacity-100 z-10"
+                                onClick={() => swiperInstance?.slideNext()}
+                            >
+                                <IoIosArrowForward />
+                            </button>
+                        )}
+                    </Swiper>
+                </div>
+            </div>
+             <div className="mt-4 py-2 px-1">
+                <h3 className="text-lg font-bold">{property?.post_title}</h3>
+                <p className="text-gray-600 text-sm">{property?.address}</p>
+                <p className="text-gray-600 text-sm">{property?.post_description}</p>
+                {/*
                 <h5 className="font-bold">{product.title}</h5>
                 <p className="text-gray-600 text-sm">{product.description}</p>
-            </div>
+                */}
+            </div> 
         </div>
     );
 };

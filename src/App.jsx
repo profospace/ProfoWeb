@@ -10,8 +10,6 @@ import Layout from './components/Layout';
 import FloatButtonShowMap from './components/FloatButtonShowMap'
 import SinglePage from './pages/SinglePage';
 import Gallery from './pages/Gallery';
-import FilterComponent from './components/FilterComponent';
-
 
 function App() {
   return (
@@ -26,8 +24,6 @@ function App() {
             <Route path='/about' element={<About />} />
             <Route path='/detail' element={<SinglePage />} />
             <Route path='/gallery' element={<Gallery />} />
-            {/* <Route path='/f' element={<FilterComponent />} /> */}
-
           </Route>
         </Routes>
     </div>
