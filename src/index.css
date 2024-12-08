@@ -70,3 +70,31 @@ body{
 .gallery-item:hover img {
   transform: scale(1.05); /* Slight zoom effect on hover */
 }
+
+/* .resize-image{
+  height: 260px;
+  width: 300px;
+  object-fit: cover;
+  background-position: center center;
+  border-radius: 10px;
+} */
+
+.aspect-ratio-box {
+    position: relative;
+    width: 100%;
+    padding-top: 90%; /* Aspect ratio: height / width * 100 (for 3:2 ratio) */
+    background: #f0f0f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.aspect-ratio-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures full visibility of the image */
+}
+
+

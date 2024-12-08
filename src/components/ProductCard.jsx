@@ -85,22 +85,8 @@ const ProductCard = ({ property }) => {
 
     /* Redirect to the google map on location Marker Click */
     const handleLocationClick = (latitude,longitude) => {
-        if (navigator.geolocation) {
-            // Get the user's current position
-            navigator.geolocation.getCurrentPosition((position) => {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-
-                // Redirect to Google Maps with the user's current location
                 const googleMapsURL = `https://www.google.com/maps?q=${latitude},${longitude}`;
                 window.open(googleMapsURL, '_blank');  // Opens the link in a new tab
-            }, (error) => {
-                console.error("Error getting location:", error);
-                alert("Unable to retrieve your location. Please enable location services.");
-            });
-        } else {
-            alert("Geolocation is not supported by your browser.");
-        }
     }
 
     useEffect(() => {
@@ -154,14 +140,12 @@ const ProductCard = ({ property }) => {
                     >
                         {property?.galleryList?.map((image, index) => (
                             <SwiperSlide key={index}>
-                                <img
-                                    src={image}
-                                    alt={`Product ${index}`}
-                                    className="rounded-md w-full min-h-60 max-h-60 min-w-60 object-contain"
-                                />
+                                <div className="aspect-ratio-box">
+                                    <img src={image} alt={`Product ${index}`} />
+                                </div>
                             </SwiperSlide>
                         ))}
-                        {/* previous btn */}
+                        {/* Previous button */}
                         {currentIndex > 0 && (
                             <button
                                 className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-[rgba(0,0,0,0.1)] text-black group-hover:bg-white hover:scale-110 duration-150 ease-in-out p-1 rounded-full shadow opacity-0 group-hover:opacity-100 z-10"
@@ -170,7 +154,7 @@ const ProductCard = ({ property }) => {
                                 <IoIosArrowBack />
                             </button>
                         )}
-                        {/* next btn */}
+                        {/* Next button */}
                         {currentIndex < property?.galleryList?.length - 1 && (
                             <button
                                 className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-[rgba(0,0,0,0.1)] text-black group-hover:bg-white hover:scale-110 duration-150 ease-in-out p-1 rounded-full shadow opacity-0 group-hover:opacity-100 z-10"
@@ -180,6 +164,7 @@ const ProductCard = ({ property }) => {
                             </button>
                         )}
                     </Swiper>
+
                 </div>
             </div>
             <div className="mt-4 py-2 px-1">
