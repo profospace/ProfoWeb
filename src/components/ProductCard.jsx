@@ -8,7 +8,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 
 import { Badge, Tag, Card, Space } from 'antd';
-import { FaLocationDot } from "react-icons/fa6";
+import { FaLocationArrow, FaLocationDot } from "react-icons/fa6";
 
 // const ProductCard = ({ product }) => {
 //     const [swiperInstance, setSwiperInstance] = useState(null);
@@ -84,9 +84,9 @@ const ProductCard = ({ property }) => {
     };
 
     /* Redirect to the google map on location Marker Click */
-    const handleLocationClick = (latitude,longitude) => {
-                const googleMapsURL = `https://www.google.com/maps?q=${latitude},${longitude}`;
-                window.open(googleMapsURL, '_blank');  // Opens the link in a new tab
+    const handleLocationClick = (latitude, longitude) => {
+        const googleMapsURL = `https://www.google.com/maps?q=${latitude},${longitude}`;
+        window.open(googleMapsURL, '_blank');  // Opens the link in a new tab
     }
 
     useEffect(() => {
@@ -96,10 +96,9 @@ const ProductCard = ({ property }) => {
     }, [currentIndex, swiperInstance]);
 
     return (
-        <div className="bg-white shadow-lg rounded-md p-2 mx-auto group relative w-72 sm:max-w-[20rem] md:max-w-[22rem] lg:max-w-[18rem] border-slate-200 hover:border-slate-300 hover:shadow-md  cursor-pointer">
-
+        <div className="cursor-pointer mb-5 group">
             <div className="">
-                {/* Conditional Badge Ribbon */}
+                {/* Conditional Badge Ribbon of antd */}
                 {property?.verified && (
                     <Badge.Ribbon
                         text="Verified"
@@ -111,20 +110,21 @@ const ProductCard = ({ property }) => {
                 <div className="relative">
                     {/* Tag for Property Purpose */}
                     <div className="flex items-center absolute bottom-0 right-0 z-10">
-                        <div>{property?.purpose && (
+                        {/* <div>{property?.purpose && (
                             <Tag
                                 color="blue"
                                 className=""
                             >
                                 {property?.purpose}
                             </Tag>
-                        )}</div>
+                        )}</div> */}
 
 
-                        <div className="cursor-pointer"
+                        {/* navigation to lat long */}
+                        {/* <div className="cursor-pointer"
                             onClick={() => handleLocationClick(property?.latitude, property?.longitude)}>
-                            <FaLocationDot size={24} className="text-blue-500" />
-                        </div>
+                            <FaLocationArrow size={24} className="text-blue-500" />
+                        </div> */}
                     </div>
                     {/* Swiper Gallery */}
                     <Swiper
@@ -136,7 +136,7 @@ const ProductCard = ({ property }) => {
                         onSlideChange={handleSlideChange}
                         onSwiper={setSwiperInstance}
                         modules={[Navigation, Pagination]}
-                        className="relative z-0"
+                        className="relative"
                     >
                         {property?.galleryList?.map((image, index) => (
                             <SwiperSlide key={index}>
@@ -148,7 +148,7 @@ const ProductCard = ({ property }) => {
                         {/* Previous button */}
                         {currentIndex > 0 && (
                             <button
-                                className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-[rgba(0,0,0,0.1)] text-black group-hover:bg-white hover:scale-110 duration-150 ease-in-out p-1 rounded-full shadow opacity-0 group-hover:opacity-100 z-10"
+                                className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-[rgba(0,0,0,0.1)] text-black group-hover:bg-white hover:scale-110 duration-150 ease-in-out p-1 rounded-full shadow  group-hover:opacity-100 z-20"
                                 onClick={() => swiperInstance?.slidePrev()}
                             >
                                 <IoIosArrowBack />
@@ -157,7 +157,7 @@ const ProductCard = ({ property }) => {
                         {/* Next button */}
                         {currentIndex < property?.galleryList?.length - 1 && (
                             <button
-                                className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-[rgba(0,0,0,0.1)] text-black group-hover:bg-white hover:scale-110 duration-150 ease-in-out p-1 rounded-full shadow opacity-0 group-hover:opacity-100 z-10"
+                                className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-[rgba(0,0,0,0.1)] text-black group-hover:bg-white hover:scale-110 duration-150 ease-in-out p-1 rounded-full shadow  group-hover:opacity-100 z-20"
                                 onClick={() => swiperInstance?.slideNext()}
                             >
                                 <IoIosArrowForward />
@@ -167,9 +167,43 @@ const ProductCard = ({ property }) => {
 
                 </div>
             </div>
-            <div className="mt-4 py-2 px-1">
-                <h3 className="text-lg font-bold">{property?.post_title}</h3>
-                <p className="text-gray-600 text-sm">{property?.address}</p>
+            <div className="mt-1 p-1">
+                <h3 className="text-md font-semibold capitalize">{property?.post_title}</h3>
+                <p className="text-gray-600 text-xs">{property?.address}</p>
+                {/* Tag for Property Purpose */}
+                <div className="flex gap-2 items-center py-2 mt-2">
+                    <div>{property?.purpose && (
+                        <Tag
+                            color="black"
+                            className=""
+                        >
+                            {property?.purpose}
+                        </Tag>
+                    )}</div>
+                    <div>{property?.area && (
+                        <Tag
+                            color="black"
+                            className=""
+                        >
+                            {property?.area + ' sq.ft.'}
+                        </Tag>
+                    )}</div>
+                    <div>{property?.construction_status && (
+                        <Tag
+                            color="black"
+                            className=""
+                        >
+                            {property?.construction_status}
+                        </Tag>
+                    )}</div>
+
+
+                    {/* navigation to lat long */}
+                    <div className="cursor-pointer"
+                        onClick={() => handleLocationClick(property?.latitude, property?.longitude)}>
+                        <FaLocationArrow size={24} color="black" />
+                    </div>
+                </div>
             </div>
         </div>
     );
