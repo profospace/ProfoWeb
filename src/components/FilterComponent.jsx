@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'antd';
-import { FaMinus, FaPlus } from 'react-icons/fa';
-import { FaKitchenSet } from 'react-icons/fa6';
 import { Button } from "@material-tailwind/react";
 import { IconButton } from '@material-tailwind/react';
 import RangeSlider from '../components/RangeSlider';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFilteredProperties } from '../redux/features/Properties/propertiesSlice';
+
+import { FaKitchenSet } from 'react-icons/fa6';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 import { FaCar, FaSwimmer, FaGuitar, FaHome, FaCloud } from 'react-icons/fa';
 import { GrLock, GrWifi } from 'react-icons/gr';
 import { RiMotorbikeFill } from 'react-icons/ri';
-/* Beds, Baths, and Floors */
+import { FaMoneyBillWave, FaStore } from 'react-icons/fa';
 
 // Mapping amenities to their respective icons
 const amenityIconMap = {
@@ -34,6 +35,18 @@ const amenityIconMap = {
 
 // Fallback icon for unknown amenities
 const fallbackIcon = <FaHome size={25} />;
+
+// Mapping purposes to their respective icons
+const purposeIconMap = {
+    "rent": <FaMoneyBillWave size={25} />,
+    "sale": <FaHome size={25} />,
+    "lease": <FaStore size={25} />,
+    "buy": <FaStore size={25} />,
+    // Add more purposes and their corresponding icons here
+};
+
+// Fallback icon for unknown purposes
+const fallbackPurposeIcon = <FaHome size={25} />;
 
 const FilterComponent = ({ modalOpen, setModalOpen }) => {
     const dispatch = useDispatch()
@@ -76,6 +89,11 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                     ];
                 }
 
+                // Purpose
+                const uniquePurposes = properties?.map(property => property.purpose).filter(purpose => purpose).map(purpose => purpose.toLowerCase());
+                acc.purpose = [...new Set(uniquePurposes)];
+                
+
                 return acc;
             },
             {
@@ -85,6 +103,7 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                 maxPrice: 0,
                 minPrice: Infinity,
                 amenities: [],
+                purpose : []
             }
         );
 
@@ -121,8 +140,10 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
         priceMax: priceRange.max,
         floors: null,
         amenities: [],
+        purpose : null ,
         propertyType: null,
     });
+    console.log("Filter-pur" , filters)
 
     // const updateFilter = (key, value) => {
     //     setFilters((prev) => ({
@@ -249,6 +270,34 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
 
                     <hr />
                 </div>
+
+
+                        {/* Purpose - buy,rent ,sale */}
+                <div className='py-4'>
+                    <h1 className='text-xl font-semibold'>Purpose</h1>
+                    <div className="flex gap-2 flex-wrap py-4">
+                        {
+                            filterRanges?.purpose?.map((purpose, index) => {
+                                // Lookup the corresponding icon for the purpose
+                                const IconComponent = purposeIconMap[purpose] || fallbackPurposeIcon;
+
+                                return (
+                                    <Button
+                                        key={index}
+                                        variant="outlined"
+                                        className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto"
+                                        onClick={() => { filters.purpose = purpose }}
+                                    >
+                                        {IconComponent}
+                                        {purpose.charAt(0).toUpperCase() + purpose.slice(1)} {/* Capitalize first letter */}
+                                    </Button>
+                                );
+                            })
+                        }
+                    </div>
+                    <hr></hr>
+                </div>
+
 
                 {/* Amenities */}
                 <div className='py-4'>

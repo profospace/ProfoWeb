@@ -10,8 +10,8 @@ const getAllProperties = async () => {
 };
 const getAllFilteredProperties = async (filters) => {
   // console.log("filters", filters)
-  const { bedrooms, bathrooms, priceMin ,priceMax } = filters
-  const response = await axios.get(`${properties_filter_base_url}?bedrooms=${bedrooms || ''}&bathrooms=${bathrooms || ''}&priceMin=${priceMin || ''}&priceMax=${priceMax || ''}`);
+  const { bedrooms, bathrooms, priceMin ,priceMax , purpose} = filters
+  const response = await axios.get(`${properties_filter_base_url}?bedrooms=${bedrooms || ''}&bathrooms=${bathrooms || ''}&priceMin=${priceMin || ''}&priceMax=${priceMax || ''}&purpose=${purpose || ''}`);
 
   // console.log("response-filter" , response)
   return response.data.properties;
