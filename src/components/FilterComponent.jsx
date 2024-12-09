@@ -1,15 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'antd';
 import { FaMinus, FaPlus } from 'react-icons/fa';
-import { GrWifi } from 'react-icons/gr';
 import { FaKitchenSet } from 'react-icons/fa6';
 import { Button } from "@material-tailwind/react";
 import { IconButton } from '@material-tailwind/react';
 import RangeSlider from '../components/RangeSlider';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFilteredProperties } from '../redux/features/Properties/propertiesSlice';
-
+import { FaCar, FaSwimmer, FaGuitar, FaHome, FaCloud } from 'react-icons/fa';
+import { GrLock, GrWifi } from 'react-icons/gr';
+import { RiMotorbikeFill } from 'react-icons/ri';
 /* Beds, Baths, and Floors */
+
+// Mapping amenities to their respective icons
+const amenityIconMap = {
+    "security patrol": <GrLock size={25} />,
+    "pet-friendly facilities": <FaHome size={25} />,
+    "parking (garage/open)": <FaCar size={25} />,
+    "valet parking": <FaCar size={25} />,
+    "guest parking": <FaCar size={25} />,
+    "bike storage": <RiMotorbikeFill size={25} />,
+    "parcel lockers": <FaHome size={25} />,
+    "business center": <FaCloud size={25} />,
+    "conference/meeting rooms": <FaCloud size={25} />,
+    "swimming-pool": <FaSwimmer size={25} />,
+    "gym": <FaGuitar size={25} />,
+    "parking": <FaCar size={25} />,
+    "24x7 security": <GrLock size={25} />,
+    "lift": <FaHome size={25} />,
+    "garden": <FaHome size={25} />,
+    "power backup": <FaCloud size={25} />
+};
+
+// Fallback icon for unknown amenities
+const fallbackIcon = <FaHome size={25} />;
+
 const FilterComponent = ({ modalOpen, setModalOpen }) => {
     const dispatch = useDispatch()
     const [filterRanges , setFilterRanges] = useState({})
@@ -36,13 +61,30 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                     acc.maxPrice = Math.max(acc.maxPrice, property.price);
                     acc.minPrice = Math.min(acc.minPrice, property.price);
                 }
+                // Collect amenities - if new added that will also be collected here
+                if (Array.isArray(property.amenities)) {
+                    const validAmenities = property.amenities
+                        .filter((amenity) => amenity && amenity.trim() !== "") // Filter out empty or undefined values
+                        .map((amenity) => amenity.trim().toLowerCase()); // Normalize the amenity names to lowercase
+
+                    // Combine amenities while removing duplicates (case-insensitive)
+                    acc.amenities = [
+                        ...new Set([
+                            ...acc.amenities,
+                            ...validAmenities,
+                        ]),
+                    ];
+                }
+
                 return acc;
             },
             {
+                // Initialize
                 maxBedrooms: 0,
                 maxBathrooms: 0,
                 maxPrice: 0,
                 minPrice: Infinity,
+                amenities: [],
             }
         );
 
@@ -211,23 +253,27 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                 {/* Amenities */}
                 <div className='py-4'>
                     <h1 className='text-xl font-semibold'>Amenities</h1>
-                    <div className='flex gap-2 flex-wrap py-4'>
-                        <Button variant="outlined" className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto">
-                            <GrWifi size={25} />
-                            Wifi
-                        </Button>
-                        <Button variant="outlined" className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto">
-                            <FaKitchenSet size={25} />
-                            Kitchen
-                        </Button>
-                        <Button variant="outlined" className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto">
-                            <GrWifi size={25} />
-                            Wifi
-                        </Button>
-                        <Button variant="outlined" className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto">
-                            <FaKitchenSet size={25} />
-                            Kitchen
-                        </Button>
+                    <div className="flex gap-2 flex-wrap py-4">
+                        {
+                            filterRanges?.amenities?.map((amenity, index) => {
+                                // Normalize the amenity name to lowercase to handle variations like "Gym", "gym"
+                                const normalizedAmenity = amenity.toLowerCase().trim();
+
+                                // Lookup the corresponding icon for the amenity
+                                const IconComponent = amenityIconMap[normalizedAmenity] || fallbackIcon;
+
+                                return (
+                                    <Button
+                                        key={index}
+                                        variant="outlined"
+                                        className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto"
+                                    >
+                                        {IconComponent}
+                                        {amenity}
+                                    </Button>
+                                );
+                            })
+                        }
                     </div>
                     <hr></hr>
                 </div>
