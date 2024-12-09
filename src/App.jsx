@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React, { lazy, useEffect } from 'react';
 import { Routes, Route } from "react-router-dom";
 
 /* Pages */
@@ -10,8 +10,18 @@ import Layout from './components/Layout';
 import FloatButtonShowMap from './components/FloatButtonShowMap'
 import SinglePage from './pages/SinglePage';
 import Gallery from './pages/Gallery';
+import { useDispatch } from 'react-redux';
+import { getAllProperties } from './redux/features/Properties/propertiesSlice';
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(
+    () => {
+      dispatch(getAllProperties())
+    }, []
+  )
+
   return (
     <div className='app '>
         {/* Custom Floating Button */}

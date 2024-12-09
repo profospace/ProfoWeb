@@ -6,15 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProperties } from "../redux/features/Properties/propertiesSlice";
 
 function Home() {
-    const dispatch = useDispatch()
     const {properties} = useSelector(state=>state.properties)
     console.log(properties)
 
-    useEffect(
-        ()=>{
-            dispatch(getAllProperties())
-        },[]
-    )
     return (
         <div className="w-full h-full bg-white">
             

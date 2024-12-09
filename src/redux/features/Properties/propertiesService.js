@@ -5,14 +5,15 @@ import { properties_base_url, properties_filter_base_url } from "../../../utils/
 
 const getAllProperties = async () => {
   const response = await axios.get(`${properties_base_url}`);
-  console.log(response)
+  // console.log(response)
   return response.data;
 };
 const getAllFilteredProperties = async (filters) => {
-  console.log("filters", filters)
-  const { bedrooms , bathrooms} = filters
-  const response = await axios.get(`${properties_filter_base_url}?bedrooms=${bedrooms || ''}&bathrooms=${bathrooms || ''}`);
-  console.log("response-filter" , response)
+  // console.log("filters", filters)
+  const { bedrooms, bathrooms, priceMin ,priceMax } = filters
+  const response = await axios.get(`${properties_filter_base_url}?bedrooms=${bedrooms || ''}&bathrooms=${bathrooms || ''}&priceMin=${priceMin || ''}&priceMax=${priceMax || ''}`);
+
+  // console.log("response-filter" , response)
   return response.data.properties;
 };
 
