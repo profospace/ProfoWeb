@@ -20,6 +20,17 @@ export const getAllProperties = createAsyncThunk(
     }
   }
 );
+// filter
+export const getAllFilteredProperties = createAsyncThunk(
+  "properties/getAllFilteredProperties",
+  async (filters, thunkAPI) => {
+    try {
+      return await propertiesService.getAllFilteredProperties(filters);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 
 
 const propertiesSlice = createSlice({
@@ -37,6 +48,19 @@ const propertiesSlice = createSlice({
         state.properties = action.payload;
       })
       .addCase(getAllProperties.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload.message;
+      })
+      .addCase(getAllFilteredProperties.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllFilteredProperties.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.properties = action.payload;
+      })
+      .addCase(getAllFilteredProperties.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload.message;

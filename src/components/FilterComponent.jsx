@@ -6,11 +6,49 @@ import { FaKitchenSet } from 'react-icons/fa6';
 import { Button } from "@material-tailwind/react";
 import { IconButton } from '@material-tailwind/react';
 import RangeSlider from '../components/RangeSlider';
+import { useDispatch } from 'react-redux';
+import { getAllFilteredProperties } from '../redux/features/Properties/propertiesSlice';
 
 /* Beds, Baths, and Floors */
 const FilterComponent = ({ modalOpen, setModalOpen }) => {
+    const dispatch = useDispatch()
     const [minPrice, setMinPrice] = useState(50000); // State for minimum price
     const [maxPrice, setMaxPrice] = useState(7000000); // State for maximum price
+
+    const [filters, setFilters] = useState({
+        bedrooms: null,
+        bathrooms: null,
+        minPrice: 50000,
+        maxPrice: 7000000,
+        floors: null,
+        amenities: [],
+        propertyType: null,
+    });
+    console.log(filters)
+
+    // const updateFilter = (key, value) => {
+    //     setFilters((prev) => ({
+    //         ...prev,
+    //         [key]: value,
+    //     }));
+    // };
+
+    const incrementFilter = (key) => {
+        setFilters((prev) => ({
+            ...prev,
+            [key]: (prev[key] || 0) + 1,
+        }));
+    };
+
+    const decrementFilter = (key) => {
+        setFilters((prev) => ({
+            ...prev,
+            [key]: Math.max(0, (prev[key] || 0) - 1),
+        }));
+    };
+
+
+
 
     // Hardcoded limits for the price range
     const PRICE_RANGE = {
@@ -43,6 +81,14 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
         setMaxPrice(values[1]);
     };
 
+    function handleDispatchFilter(e){
+        e.preventDefault()
+        setModalOpen(false)
+        
+        // dispatching filter 
+        dispatch(getAllFilteredProperties(filters))
+    }
+
 
     return (
         <Modal
@@ -69,11 +115,11 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                     <div className='flex justify-between items-center py-2 mb-1'>
                         <div className='text-xl'>Beds</div>
                         <div className='flex items-center gap-3'>
-                            <IconButton variant="outlined" className="rounded-full w-8 h-8">
+                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => decrementFilter('bedrooms')} disabled={filters.bedrooms < 1}>
                                 <FaMinus />
                             </IconButton>
-                            <div className='text-xl'>Any</div>
-                            <IconButton variant="outlined" className="rounded-full w-8 h-8">
+                            <div className='text-xl text-center min-w-10'>{filters.bedrooms ? filters.bedrooms + '+ ' : "Any"}</div>
+                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => incrementFilter('bedrooms')}>
                                 <FaPlus />
                             </IconButton>
                         </div>
@@ -83,11 +129,11 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                     <div className='flex justify-between items-center py-2 mb-1'>
                         <div className='text-xl'>Floors</div>
                         <div className='flex items-center gap-3'>
-                            <IconButton variant="outlined" className="rounded-full w-8 h-8">
+                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => decrementFilter('floors')}>
                                 <FaMinus />
                             </IconButton>
                             <div className='text-xl'>Any</div>
-                            <IconButton variant="outlined" className="rounded-full w-8 h-8">
+                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => incrementFilter('floors')}>
                                 <FaPlus />
                             </IconButton>
                         </div>
@@ -97,11 +143,11 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                     <div className='flex justify-between items-center py-2 mb-1'>
                         <div className='text-xl'>Bathrooms</div>
                         <div className='flex items-center gap-3'>
-                            <IconButton variant="outlined" className="rounded-full w-8 h-8">
+                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => decrementFilter('bathrooms')} disabled={filters.bathrooms < 1}>
                                 <FaMinus />
                             </IconButton>
-                            <div className='text-xl'>Any</div>
-                            <IconButton variant="outlined" className="rounded-full w-8 h-8">
+                            <div className='text-xl text-center min-w-10'>{filters.bathrooms ? filters.bathrooms + '+ ' : "Any"}</div>
+                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => incrementFilter('bathrooms')}>
                                 <FaPlus />
                             </IconButton>
                         </div>
@@ -206,10 +252,10 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                     {/* will ad icon if required */}
                 </Button>
                 <Button
-                    onClick={() => {
+                    onClick={
                         // Handle apply filter logic here
-                        setModalOpen(false);
-                    }}
+                        handleDispatchFilter
+                    }
                     type="primary"
                     className="rounded-full px-6"
                 >

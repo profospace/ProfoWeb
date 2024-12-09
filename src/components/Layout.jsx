@@ -11,7 +11,7 @@ function Layout() {
 
         <>
             <Navbar />
-            <FiltersSection />
+            <FiltersSection /> {/* includes filter carousal + filter Btn */}
             <Suspense fallback={<LoadingPage />}>
                 <Outlet />
             <Footer />
