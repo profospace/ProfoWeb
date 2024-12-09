@@ -11,7 +11,7 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 import { FaCar, FaSwimmer, FaGuitar, FaHome, FaCloud } from 'react-icons/fa';
 import { GrLock, GrWifi } from 'react-icons/gr';
 import { RiMotorbikeFill } from 'react-icons/ri';
-import { FaMoneyBillWave, FaStore } from 'react-icons/fa';
+import { FaMoneyBillWave, FaStore, FaWarehouse, FaBuilding } from 'react-icons/fa';
 
 // Mapping amenities to their respective icons
 const amenityIconMap = {
@@ -48,6 +48,21 @@ const purposeIconMap = {
 // Fallback icon for unknown purposes
 const fallbackPurposeIcon = <FaHome size={25} />;
 
+
+// Mapping type_name to their respective icons
+const typeNameIconMap = {
+    "warehouses": <FaWarehouse size={25} />,
+    "shops": <FaStore size={25} />,
+    "apartment": <FaBuilding size={25} />,
+    "commercial": <FaBuilding size={25} />,
+    "house": <FaHome size={25} />,
+    "villa": <FaHome size={25} />,
+    // Add more types and their corresponding icons here
+};
+
+// Fallback icon for unknown types
+const fallbackTypeIcon = <FaHome size={25} />;
+
 const FilterComponent = ({ modalOpen, setModalOpen }) => {
     const dispatch = useDispatch()
     const [filterRanges , setFilterRanges] = useState({})
@@ -69,6 +84,9 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                 }
                 if (property.bathrooms !== null && property.bathrooms !== undefined) {
                     acc.maxBathrooms = Math.max(acc.maxBathrooms, property.bathrooms);
+                }
+                if (property.floor !== null && property.floor !== undefined) {
+                    acc.maxfloor = Math.max(acc.maxfloor, property.floor);
                 }
                 if (property.price !== null && property.price !== undefined) {
                     acc.maxPrice = Math.max(acc.maxPrice, property.price);
@@ -93,6 +111,10 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                 const uniquePurposes = properties?.map(property => property.purpose).filter(purpose => purpose).map(purpose => purpose.toLowerCase());
                 acc.purpose = [...new Set(uniquePurposes)];
                 
+
+                // Property type ? - Aprt ,house,villa , office ???
+                const uniquePropertyType = properties?.map(property => property.type_name).filter(type => type).map(propertyType => propertyType.toLowerCase())
+                acc.type_name = [...new Set(uniquePropertyType)]
 
                 return acc;
             },
@@ -136,11 +158,13 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
     const [filters, setFilters] = useState({
         bedrooms: null,
         bathrooms: null,
-        priceMin: priceRange.min,
-        priceMax: priceRange.max,
-        floors: null,
+        floors : null,
+        priceMin: null, // useEffect is applied -Note
+        priceMax: null,
+        floor: null,
         amenities: [],
         purpose : null ,
+        type_name : null,
         propertyType: null,
     });
     console.log("Filter-pur" , filters)
@@ -241,18 +265,18 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                     </div>
 
                     {/* Floors */}
-                    {/* <div className='flex justify-between items-center py-2 mb-1'>
+                    <div className='flex justify-between items-center py-2 mb-1'>
                         <div className='text-xl'>Floors</div>
                         <div className='flex items-center gap-3'>
-                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => decrementFilter('floors')}>
+                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => decrementFilter('floor')} disabled={filters?.floor < 1}>
                                 <FaMinus />
                             </IconButton>
-                            <div className='text-xl'>Any</div>
-                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => incrementFilter('floors')} >
+                            <div className='text-xl text-center min-w-10'>{filters.floor ? filters.floor + '+ ' : "Any"}</div>
+                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => incrementFilter('floor')} disabled={filterRanges?.maxfloor == filters.floor} >
                                 <FaPlus />
                             </IconButton>
                         </div>
-                    </div> */}
+                    </div>
 
                     {/* Bathrooms */}
                     <div className='flex justify-between items-center py-2 mb-1'>
@@ -330,26 +354,27 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                 {/* Property Type */}
                 <div className='py-4'>
                     <h1 className='text-xl font-semibold'>Property Type</h1>
-                    <div className='flex gap-2 flex-wrap py-4'>
-                        <Button variant="outlined" className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto">
-                            <GrWifi size={25} />
-                            House
-                        </Button>
-                        <Button variant="outlined" className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto">
-                            <FaKitchenSet size={25} />
-                            Apartment
-                        </Button>
-                        <Button variant="outlined" className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto">
-                            <GrWifi size={25} />
-                            Guest House
-                        </Button>
-                        <Button variant="outlined" className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto">
-                            <FaKitchenSet size={25} />
-                            Plot
-                        </Button>
+                    <div className="flex gap-2 flex-wrap py-4">
+                        {
+                            filterRanges?.type_name?.map((typeName, index) => {
+                                // Lookup the corresponding icon for the type_name
+                                const IconComponent = typeNameIconMap[typeName] || fallbackTypeIcon;
+
+                                return (
+                                    <Button
+                                        key={index}
+                                        variant="outlined"
+                                        className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto"
+                                        onClick={() => { filters.type_name = typeName , console.log(filters) }}
+                                    >
+                                        {IconComponent}
+                                        {typeName.charAt(0).toUpperCase() + typeName.slice(1)} {/* Capitalize first letter */}
+                                    </Button>
+                                );
+                            })
+                        }
                     </div>
                     <hr></hr>
-
                 </div>
 
                 {/* Price range */}
