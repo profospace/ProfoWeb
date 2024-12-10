@@ -1,29 +1,29 @@
-import React, { useEffect } from "react";
-import PopupLocation from "../components/PopupLocation";
+import React from "react";
 import LocationAccessPopup from "../components/LocationAccessPopup";
 import ProductCard from "../components/ProductCard";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllProperties } from "../redux/features/Properties/propertiesSlice";
+import { useSelector } from "react-redux";
 
 function Home() {
-    const {properties} = useSelector(state=>state.properties)
-    console.log(properties)
+    const { properties } = useSelector((state) => state.properties);
+    const { filteredProperties } = useSelector((state) => state.properties);
+
+    // Determine which list to render
+    const propertiesToDisplay = filteredProperties?.length > 0 ? filteredProperties : properties;
 
     return (
         <div className="w-full h-full bg-white">
-            
             <LocationAccessPopup />
-            {/* <div className="grid gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 flex-wrap">
-                {dummyProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                ))}
-            </div> */}
             <div className="grid gap-6 p-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
-                {properties?.map((property) => (
-                    <ProductCard key={property._id} property={property} />
-                ))}
+                {propertiesToDisplay?.length > 0 ? (
+                    propertiesToDisplay.map((property) => (
+                        <ProductCard key={property._id} property={property} />
+                    ))
+                ) : (
+                    <div className="col-span-full text-center text-gray-500">
+                        No properties available to display.
+                    </div>
+                )}
             </div>
-
         </div>
     );
 }

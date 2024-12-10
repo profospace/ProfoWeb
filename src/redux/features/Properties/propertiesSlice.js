@@ -3,6 +3,7 @@ import propertiesService from "./propertiesService";
 
 const initialState = {
   properties: null,
+  filteredProperties : null ,
   isLoading: false,
   isSuccess: false,
   isError: false,
@@ -58,7 +59,7 @@ const propertiesSlice = createSlice({
       .addCase(getAllFilteredProperties.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.properties = action.payload;
+        state.filteredProperties = action.payload;
       })
       .addCase(getAllFilteredProperties.rejected, (state, action) => {
         state.isLoading = false;
