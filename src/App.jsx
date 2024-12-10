@@ -4,12 +4,14 @@ import { Routes, Route } from "react-router-dom";
 /* Pages */
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
+const SinglePage = lazy(() => import('./pages/SinglePage'));
+const Gallery = lazy(() => import('./pages/Gallery'));
 
 /* Layout Component */
 import Layout from './components/Layout';
 import FloatButtonShowMap from './components/FloatButtonShowMap'
-import SinglePage from './pages/SinglePage';
-import Gallery from './pages/Gallery';
+
+/* redux */
 import { useDispatch } from 'react-redux';
 import { getAllProperties } from './redux/features/Properties/propertiesSlice';
 
@@ -32,7 +34,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path='/about' element={<About />} />
-            <Route path='/detail' element={<SinglePage />} />
+            <Route path='/details/:post_id' element={<SinglePage />} />
             <Route path='/gallery' element={<Gallery />} />
           </Route>
         </Routes>

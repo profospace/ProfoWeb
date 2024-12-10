@@ -189,6 +189,40 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
         });
     };
 
+    // purpose type - rent ,buy
+    const togglePurposeType = (purpose) =>{
+        setFilters((prev) => ({
+            ...prev,
+            purpose: prev.purpose === purpose ? null : purpose, // Toggle selection
+        }))
+    }
+
+    // clearAllFilters
+    const clearAllFilters = () => {
+        setFilters({
+            bedrooms: null,
+            bathrooms: null,
+            floors: null,
+            priceMin: null,
+            priceMax: null,
+            floor: null,
+            amenities: [],
+            purpose: null,
+            type_name: [],
+            propertyType: null,
+        });
+        setPriceRange({
+            min: filterRanges.minPrice || 0,
+            max: filterRanges.maxPrice || 0,
+        });
+        
+        // filter ki redux state ko null krdo , to automatic vo properties show karede sab
+        
+        setModalOpen(false) // close the filter modal
+
+
+    };
+
     // const updateFilter = (key, value) => {
     //     setFilters((prev) => ({
     //         ...prev,
@@ -324,13 +358,15 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                             filterRanges?.purpose?.map((purpose, index) => {
                                 // Lookup the corresponding icon for the purpose
                                 const IconComponent = purposeIconMap[purpose] || fallbackPurposeIcon;
-
+                                const isSelected = filters.purpose === purpose;
                                 return (
                                     <Button
                                         key={index}
-                                        variant="outlined"
+                                        variant={isSelected ? "filled" : "outlined"} // Highlight selected proepty type
                                         className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto"
-                                        onClick={() => { filters.purpose = purpose }}
+                                        onClick={() =>
+                                            togglePurposeType(purpose)
+                                        }
                                     >
                                         {IconComponent}
                                         {purpose.charAt(0).toUpperCase() + purpose.slice(1)} {/* Capitalize first letter */}
@@ -437,7 +473,7 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
 
             {/* Custom Footer with Buttons  , default antd footer is set falsed*/}
             <div className="flex justify-between gap-4 pt-4">
-                <Button variant="text" className="flex items-center gap-2">
+                <Button variant="text" className="flex items-center gap-2" onClick={clearAllFilters}>
                     Clear all{" "}
                     {/* will ad icon if required */}
                 </Button>

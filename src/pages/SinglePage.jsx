@@ -1,24 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Button } from "@material-tailwind/react";
 import "swiper/css";
 import { PiDotsNineBold } from "react-icons/pi";
 import { CarouselImages } from "../components/CarousalImages";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getSingleProperty } from "../redux/features/Properties/propertiesSlice";
 
 const SinglePage = () => {
-    const images = [
-        "https://via.placeholder.com/800x600",
-        "https://via.placeholder.com/800x600",
-        "https://via.placeholder.com/800x600",
-        "https://via.placeholder.com/800x600",
-    ];
+    const { post_id } = useParams()
+    const dispatch = useDispatch()
+    const { propertyDetail } = useSelector(state => state.properties)
+    const [images , setImages] = useState([])
+    console.log(propertyDetail)
+
+    // Fetch property details
+    useEffect(() => {
+        dispatch(getSingleProperty(post_id));
+    }, [post_id, dispatch]);
+
+    // Collect all images when propertyDetail changes
+    useEffect(() => {
+        if (propertyDetail) {
+            const collectedImages = [];
+
+            if (propertyDetail.post_image) {
+                collectedImages.push(propertyDetail.post_image);
+            }
+
+            if (propertyDetail.floor_plan_image) {
+                collectedImages.push(propertyDetail.floor_plan_image);
+            }
+
+            if (Array.isArray(propertyDetail.galleryList)) {
+                collectedImages.push(...propertyDetail.galleryList);
+            }
+
+            setImages(collectedImages);
+        }
+    }, [propertyDetail]);
+
 
     return (
         <div className="container mx-auto px-4">
             {/* Title */}
             <div className="mb-8">
-                <h1 className="text-2xl lg:text-3xl font-bold text-gray-800">
-                    Highrise Heaven 16th Floor with Garden Patio 3
+                <h1 className="text-2xl lg:text-3xl font-bold text-gray-800 capitalize">
+                    {propertyDetail?.post_title}
                 </h1>
             </div>
 

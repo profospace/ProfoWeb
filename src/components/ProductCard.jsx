@@ -9,73 +9,12 @@ import { IoIosArrowForward } from "react-icons/io";
 
 import { Badge, Tag, Card, Space } from 'antd';
 import { FaLocationArrow, FaLocationDot } from "react-icons/fa6";
-
-// const ProductCard = ({ product }) => {
-//     const [swiperInstance, setSwiperInstance] = useState(null);
-//     const [currentIndex, setCurrentIndex] = useState(0);
-
-//     const handleSlideChange = (swiper) => {
-//         setCurrentIndex(swiper.activeIndex);
-//     };
-
-//     useEffect(() => {
-//         if (swiperInstance && currentIndex !== swiperInstance.activeIndex) {
-//             swiperInstance.slideTo(currentIndex); // Sync swiper with the current index
-//         }
-//     }, [currentIndex, swiperInstance]);
-
-//     return (
-//         <div className="bg-white shadow-lg rounded-md p-2 max-w-[18rem] mx-auto group relative">
-//             <Swiper
-//                 pagination={{ clickable: true }}
-//                 navigation={{
-//                     nextEl: ".custom-next",
-//                     prevEl: ".custom-prev",
-//                 }}
-//                 onSlideChange={handleSlideChange}
-//                 onSwiper={setSwiperInstance}
-//                 modules={[Navigation, Pagination]}
-//                 className="relative"
-//             >
-//                 {product.images.map((image, index) => (
-//                     <SwiperSlide key={index}>
-//                         <img
-//                             src={image}
-//                             alt={`Product ${index}`}
-//                             className="rounded-md w-full min-h-60 object-cover"
-//                         />
-//                     </SwiperSlide>
-//                 ))}
-//                 {/* Back Arrow Button */}
-//                 {currentIndex > 0 && (
-//                     <button
-//                         className="custom-prev absolute top-1/2 left-2 transform -translate-y-1/2 bg-[rgba(0,0,0,0.1)] text-black hover:bg-white hover:scale-110 duration-150 ease-in-out p-1 rounded-full shadow opacity-0 group-hover:opacity-100"
-//                         onClick={() => swiperInstance?.slidePrev()}
-//                     >
-//                         <IoIosArrowBack />
-//                     </button>
-//                 )}
-//                 {/* Forward Arrow Button */}
-//                 {currentIndex < product.images.length - 1 && (
-//                     <button
-//                         className="custom-next absolute top-1/2 right-2 transform -translate-y-1/2 bg-[rgba(0,0,0,0.1)] text-black hover:bg-white hover:scale-110 duration-150 ease-in-out p-1 rounded-full shadow opacity-0 group-hover:opacity-100"
-//                         onClick={() => swiperInstance?.slideNext()}
-//                     >
-//                         <IoIosArrowForward />
-//                     </button>
-//                 )}
-//             </Swiper>
-//             <div className="mt-4 py-2 px-1">
-//                 <h3 className="text-lg font-bold">{product.title}</h3>
-//                 <p className="text-gray-600 text-sm">{product.description}</p>
-//                 <h5 className="font-bold">{product.title}</h5>
-//                 <p className="text-gray-600 text-sm">{product.description}</p>
-//             </div>
-//         </div>
-//     );
-// };
+import { Button } from "@material-tailwind/react";
+import { PiPhoneDisconnectThin } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = ({ property }) => {
+    const navigate = useNavigate()
     const [swiperInstance, setSwiperInstance] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -95,8 +34,12 @@ const ProductCard = ({ property }) => {
         }
     }, [currentIndex, swiperInstance]);
 
+    const handleCardClick = () => {
+        navigate(`/details/${property?.post_id}`); // Navigate to the route with the post ID
+    };
+
     return (
-        <div className="cursor-pointer mb-5 group">
+        <div className="cursor-pointer mb-5 group" onClick={handleCardClick}>
             <div className="">
                 {/* Conditional Badge Ribbon of antd */}
                 {property?.verified && (
@@ -167,10 +110,10 @@ const ProductCard = ({ property }) => {
 
                 </div>
             </div>
-            <div className="mt-1 p-1">
+            <div className="mt-1 py-1">
                 <h3 className="text-md font-semibold capitalize">{property?.post_title}</h3>
                 <p className="text-gray-600 text-xs">{property?.address}</p>
-                {/* Tag for Property Purpose */}
+                {/* Tag for Property Purpose,area, constr_status */}
                 <div className="flex gap-2 items-center py-2 mt-2">
                     <div>{property?.purpose && (
                         <Tag
@@ -198,14 +141,23 @@ const ProductCard = ({ property }) => {
                     )}</div>
 
 
-                    {/* navigation to lat long */}
-                    <div className="cursor-pointer"
-                        onClick={() => handleLocationClick(property?.latitude, property?.longitude)}>
-                        <FaLocationArrow size={24} color="black" />
-                    </div>
+
+                </div>
+                {/* navigation to lat long & calling/connect+ */}
+                <div className="flex items-center gap-6">
+                    <Button variant="gradient" className="flex items-center gap-3 m-0 py-2 px-16" onClick={() => {
+                        window.location.href = `tel:${property?.phone}`; // Replace with the desired phone number
+                    }}>
+                        Connect
+                        <PiPhoneDisconnectThin size={16}/>
+                    </Button>
+                <div className="cursor-pointer"
+                    onClick={() => handleLocationClick(property?.latitude, property?.longitude)}>
+                    <FaLocationArrow size={28} color="black" />
                 </div>
             </div>
         </div>
+        </div >
     );
 };
 

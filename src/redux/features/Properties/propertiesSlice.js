@@ -4,6 +4,7 @@ import propertiesService from "./propertiesService";
 const initialState = {
   properties: null,
   filteredProperties : null ,
+  propertyDetail : null,
   isLoading: false,
   isSuccess: false,
   isError: false,
@@ -21,12 +22,25 @@ export const getAllProperties = createAsyncThunk(
     }
   }
 );
+
 // filter
 export const getAllFilteredProperties = createAsyncThunk(
   "properties/getAllFilteredProperties",
   async (filters, thunkAPI) => {
     try {
       return await propertiesService.getAllFilteredProperties(filters);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
+
+// get single property
+export const getSingleProperty = createAsyncThunk(
+  "properties/getSingleProperty",
+  async (post_id, thunkAPI) => {
+    try {
+      return await propertiesService.getSingleProperty(post_id);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
@@ -62,6 +76,19 @@ const propertiesSlice = createSlice({
         state.filteredProperties = action.payload;
       })
       .addCase(getAllFilteredProperties.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload.message;
+      })
+      .addCase(getSingleProperty.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getSingleProperty.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.propertyDetail = action.payload;
+      })
+      .addCase(getSingleProperty.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload.message;
