@@ -164,10 +164,30 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
         floor: null,
         amenities: [],
         purpose : null ,
-        type_name : null,
+        type_name : [],
         propertyType: null,
     });
     console.log("Filter-pur" , filters)
+
+    /* handle property type (type_name) selection */
+    const togglePropertyType = (selectedProperty) => {
+        setFilters((prev) => {
+            const propertyTypes = [...prev.type_name];
+            if (propertyTypes.includes(selectedProperty)) {
+                // Remove type_name if already selected
+                return {
+                    ...prev,
+                    type_name: propertyTypes.filter((purpose) => purpose !== selectedProperty),
+                };
+            } else {
+                // Add type_name if not already selected
+                return {
+                    ...prev,
+                    type_name: [...propertyTypes, selectedProperty],
+                };
+            }
+        });
+    };
 
     // const updateFilter = (key, value) => {
     //     setFilters((prev) => ({
@@ -359,13 +379,14 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                             filterRanges?.type_name?.map((typeName, index) => {
                                 // Lookup the corresponding icon for the type_name
                                 const IconComponent = typeNameIconMap[typeName] || fallbackTypeIcon;
+                                const isSelected = filters.type_name.includes(typeName);
 
                                 return (
                                     <Button
                                         key={index}
-                                        variant="outlined"
+                                        variant={isSelected ? "filled" : "outlined"} // Highlight selected proepty type
                                         className="flex items-center gap-3 rounded-full py-2 w-full sm:w-auto"
-                                        onClick={() => { filters.type_name = typeName , console.log(filters) }}
+                                        onClick={() => togglePropertyType(typeName)}
                                     >
                                         {IconComponent}
                                         {typeName.charAt(0).toUpperCase() + typeName.slice(1)} {/* Capitalize first letter */}

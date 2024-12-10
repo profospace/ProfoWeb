@@ -12,7 +12,7 @@ function Home() {
 
     return (
         <div className="w-full h-full bg-white">
-            <LocationAccessPopup />
+            {/* <LocationAccessPopup /> */}
             <div className="grid gap-6 p-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
                 {propertiesToDisplay?.length > 0 ? (
                     propertiesToDisplay.map((property) => (
