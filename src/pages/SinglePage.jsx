@@ -12,8 +12,8 @@ const SinglePage = () => {
     const { post_id } = useParams()
     const dispatch = useDispatch()
     const { propertyDetail } = useSelector(state => state.properties)
-    const [images , setImages] = useState([])
-    console.log(propertyDetail)
+    const [images, setImages] = useState([])
+    console.log(images)
 
     // Fetch property details
     useEffect(() => {
@@ -51,45 +51,62 @@ const SinglePage = () => {
                 </h1>
             </div>
 
-            {/* Desktop Grid */}
-            {/* <div className="hidden lg:grid grid-cols-2 gap-4">
-                {images.map((src, index) => (
-                    <div key={index} className="rounded-lg overflow-hidden shadow-md">
-                        <img
-                            src={src}
-                            alt={`Gallery ${index}`}
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                ))}
-            </div> */}
-
-
             <div className="relative">
                 {/* Desktop Grid */}
-                <div className="hidden lg:grid grid-cols-2 gap-4 items-center ">
-                    {/* Full Height Box on the Left */}
-                    <div className="bg-gray-200 flex items-center justify-center text-2xl font-bold rounded-lg shadow-md h-full">
-                        <CarouselImages />  {/* Set of images for carousal */}
-                    </div>
 
-                    {/* 2x2 Grid on the Right */}
-                    <div className="grid grid-cols-2 gap-4 h-full">
-                        <div className="bg-blue-200 flex items-center justify-center rounded-lg shadow-md h-40">
-                            Box 1
-                        </div>
-                        <div className="bg-green-200 flex items-center justify-center rounded-lg shadow-md h-40">
-                            Box 2
-                        </div>
-                        <div className="bg-yellow-200 flex items-center justify-center rounded-lg shadow-md h-40">
-                            Box 3
-                        </div>
-                        <div className="bg-red-200 flex items-center justify-center rounded-lg shadow-md h-40">
-                            Box 4
-                        </div>
-                    </div>
+                {/* if more than 3 image then grid is : 2:3 else 3:1 */}
+                {
+                    images?.length > 3 ? <>
+                        {/* if images are more than 3 */}
+                        <div className="hidden lg:grid grid-cols-2 gap-2 items-center ">
+                            {/* Full Height Box on the Left */}
+                            <div className="bg-gray-200 flex items-center justify-center text-2xl font-bold rounded-lg shadow-md h-96">
+                                <CarouselImages images={images} />  {/* Set of images for carousal */}
+                            </div>
 
-                </div>
+                            {/* 2x2 Grid on the Right */}
+                            <div className="grid grid-cols-2 gap-2 h-full">
+                                {
+                                    images?.slice(0, 4).map((image, index) => (
+                                        <img
+                                            key={index}
+                                            className="bg-green-200 flex items-center justify-center rounded-lg shadow-md h-48 w-full object-cover"
+                                            src={image}
+                                            alt={`Image ${index + 1}`}
+                                        />
+                                    ))
+                                }
+                            </div>
+                        </div></> :
+                        <>
+                            {/* if images are 3 , issey kam to honi nhi h */}
+                            <div className="hidden lg:grid grid-cols-4 gap-4 items-center ">
+                                {/* Full Height Box on the Left */}
+                                <div className="bg-gray-200 flex items-center justify-center text-2xl font-bold rounded-lg shadow-md h-96 col-span-3">
+                                    <CarouselImages images={images} />  {/* Set of images for carousal */}
+                                </div>
+
+                                {/* 2x2 Grid on the Right */}
+                                <div className="grid gap-2 h-full">
+                                    {
+                                        images?.slice(0, 2).map((image, index) => (
+                                            <img
+                                                key={index}
+                                                className="bg-green-200 flex items-center justify-center rounded-lg shadow-md h-48 w-full object-cover"
+                                                src={image}
+                                                alt={`Image ${index + 1}`}
+                                            />
+                                        ))
+                                    }
+                                </div>
+
+                            </div></>
+                }
+
+
+
+
+
 
                 {/* Mobile Carousel */}
                 <div className="lg:hidden">
