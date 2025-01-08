@@ -3,9 +3,8 @@ import LocationAccessPopup from "../components/LocationAccessPopup";
 import ProductCard from "../components/ProductCard";
 import { useSelector } from "react-redux";
 import FloatButtonShowMap from '../components/FloatButtonShowMap'
-import FiltersSection from "../components/FiltersSection";
 
-function PropertiesPage() {
+function Home() {
     const { properties } = useSelector((state) => state.properties);
     const { filteredProperties } = useSelector((state) => state.properties);
 
@@ -32,4 +31,4 @@ function PropertiesPage() {
     );
 }
 
-export default PropertiesPage;
+export default Home;

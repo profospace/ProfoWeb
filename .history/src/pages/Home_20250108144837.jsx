@@ -207,7 +207,7 @@ function Home() {
             <div className="relative px-4 md:px-6 py-12">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid property-grid gap-6">
-                        {properties?.map(property => (
+                        {properties.map(property => (
                             <PropertyCard key={property._id} property={property} />
                         ))}
                     </div>

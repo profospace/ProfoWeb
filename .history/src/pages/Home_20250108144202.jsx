@@ -92,72 +92,71 @@ import PropertyCard from '../components/PropertyCard';
 import { useSelector } from 'react-redux';
 
 function Home() {
-    const {properties} = useSelector((state) => state.properties);
-    console.log("obj",properties)
+    const { properties } = useSelector((state) => state.properties);
     
-    // const properties = [
-    //     {
-    //         id: 1,
-    //         image: "/assets/testing.avif",
-    //         timePosted: "8 hours ago",
-    //         price: 438700,
-    //         beds: 1,
-    //         baths: 2,
-    //         sqft: 883,
-    //         address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
-    //     },
-    //     {
-    //         id: 1,
-    //         image: "/assets/testing2.webp",
-    //         timePosted: "8 hours ago",
-    //         price: 438700,
-    //         beds: 1,
-    //         baths: 2,
-    //         sqft: 883,
-    //         address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
-    //     },
-    //     {
-    //         id: 1,
-    //         image: "/assets/testing.avif",
-    //         timePosted: "8 hours ago",
-    //         price: 438700,
-    //         beds: 1,
-    //         baths: 2,
-    //         sqft: 883,
-    //         address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
-    //     },
-    //     {
-    //         id: 1,
-    //         image: "/assets/testing2.webp",
-    //         timePosted: "8 hours ago",
-    //         price: 438700,
-    //         beds: 1,
-    //         baths: 2,
-    //         sqft: 883,
-    //         address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
-    //     },
-    //     {
-    //         id: 1,
-    //         image: "/assets/testing.avif",
-    //         timePosted: "8 hours ago",
-    //         price: 438700,
-    //         beds: 1,
-    //         baths: 2,
-    //         sqft: 883,
-    //         address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
-    //     },
-    //     {
-    //         id: 1,
-    //         image: "/assets/testing2.webp",
-    //         timePosted: "8 hours ago",
-    //         price: 438700,
-    //         beds: 1,
-    //         baths: 2,
-    //         sqft: 883,
-    //         address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
-    //     },
+    const properties = [
+        {
+            id: 1,
+            image: "/assets/testing.avif",
+            timePosted: "8 hours ago",
+            price: 438700,
+            beds: 1,
+            baths: 2,
+            sqft: 883,
+            address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
+        },
+        {
+            id: 1,
+            image: "/assets/testing2.webp",
+            timePosted: "8 hours ago",
+            price: 438700,
+            beds: 1,
+            baths: 2,
+            sqft: 883,
+            address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
+        },
+        {
+            id: 1,
+            image: "/assets/testing.avif",
+            timePosted: "8 hours ago",
+            price: 438700,
+            beds: 1,
+            baths: 2,
+            sqft: 883,
+            address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
+        },
+        {
+            id: 1,
+            image: "/assets/testing2.webp",
+            timePosted: "8 hours ago",
+            price: 438700,
+            beds: 1,
+            baths: 2,
+            sqft: 883,
+            address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
+        },
+        {
+            id: 1,
+            image: "/assets/testing.avif",
+            timePosted: "8 hours ago",
+            price: 438700,
+            beds: 1,
+            baths: 2,
+            sqft: 883,
+            address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
+        },
+        {
+            id: 1,
+            image: "/assets/testing2.webp",
+            timePosted: "8 hours ago",
+            price: 438700,
+            beds: 1,
+            baths: 2,
+            sqft: 883,
+            address: "5115 Gulf Dr Unit 1606, Panama City Beach, FL 32408"
+        },
 
-    // ];
+    ];
     return (
         <div className="w-full px-4 sm:px-6 lg:px-8">
             {/* Hero Section */}
@@ -207,8 +206,8 @@ function Home() {
             <div className="relative px-4 md:px-6 py-12">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid property-grid gap-6">
-                        {properties?.map(property => (
-                            <PropertyCard key={property._id} property={property} />
+                        {properties.map(property => (
+                            <PropertyCard key={property.id} property={property} />
                         ))}
                     </div>
 

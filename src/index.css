@@ -21,28 +21,7 @@
             --mouse-y: 50%;
           }
 
-.gradient-bg {
-            background: radial-gradient(
-              70% 70% at var(--mouse-x) var(--mouse-y),
-              #FFF5F3 0%,
-              #FFF9F8 45%,
-              #FFFFFF 100%
-            );
-            min-height: 100vh;
-            transition: background 0.2s ease-out;
-            cursor: pointer;
-          }
 
-          @media (hover: none) {
-            .gradient-bg {
-              background: radial-gradient(
-                70% 70% at 50% 50%,
-                #FFF5F3 0%,
-                #FFF9F8 45%,
-                #FFFFFF 100%
-              );
-            }
-}
 
 body{
   width: 100%;
@@ -181,18 +160,58 @@ body{
     animation: fadeIn 1s ease-in-out forwards;
 }
 
-/* @keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
+.gradient-bg {
+            background: radial-gradient(
+              70% 70% at var(--mouse-x) var(--mouse-y),
+              #FFF5F3 0%,
+              #FFF9F8 45%,
+              #FFFFFF 100%
+            );
+            min-height: 100vh;
+            transition: background 0.2s ease-out;
+            cursor: pointer;
+          }
+
+          @media (hover: none) {
+            .gradient-bg {
+              background: radial-gradient(
+                70% 70% at 50% 50%,
+                #FFF5F3 0%,
+                #FFF9F8 45%,
+                #FFFFFF 100%
+              );
+            }
 }
 
-.animate-bounce {
-    animation: bounce 1.5s infinite;
-} */
+
+/* PropertiesByLocationCarousel */
+.see-all-button {
+            background: linear-gradient(90deg, #1a365d 0%, #2d3748 100%);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+            transform: translateY(50%);
+          }
+          
+          .see-all-button:hover {
+            background: linear-gradient(90deg, #2d3748 0%, #1a365d 100%);
+          }
+
+          @media (max-width: 640px) {
+            .property-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+
+          @media (min-width: 641px) and (max-width: 1024px) {
+            .property-grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+
+          @media (min-width: 1025px) {
+            .property-grid {
+              grid-template-columns: repeat(3, 1fr);
+            }
+          }
 
 
 

@@ -4,8 +4,9 @@ import ProductCard from "../components/ProductCard";
 import { useSelector } from "react-redux";
 import FloatButtonShowMap from '../components/FloatButtonShowMap'
 import FiltersSection from "../components/FiltersSection";
+import PropertyCard from "../components/PropertyCard";
 
-function PropertiesPage() {
+function Home() {
     const { properties } = useSelector((state) => state.properties);
     const { filteredProperties } = useSelector((state) => state.properties);
 
@@ -20,7 +21,7 @@ function PropertiesPage() {
             <div className="grid gap-6 p-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
                 {propertiesToDisplay?.length > 0 ? (
                     propertiesToDisplay.map((property) => (
-                        <ProductCard key={property._id} property={property} />
+                        <PropertyCard key={property._id} property={property} />
                     ))
                 ) : (
                     <div className="col-span-full text-center text-gray-500">
@@ -32,4 +33,4 @@ function PropertiesPage() {
     );
 }
 
-export default PropertiesPage;
+export default Home;

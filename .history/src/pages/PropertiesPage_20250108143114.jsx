@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import FloatButtonShowMap from '../components/FloatButtonShowMap'
 import FiltersSection from "../components/FiltersSection";
 
-function PropertiesPage() {
+function Home() {
     const { properties } = useSelector((state) => state.properties);
     const { filteredProperties } = useSelector((state) => state.properties);
 
@@ -13,7 +13,7 @@ function PropertiesPage() {
     const propertiesToDisplay = filteredProperties?.length > 0 ? filteredProperties : properties;
 
     return (
-        <div className="w-full h-full bg-white">
+        <div className="w-full h-full">
             <FiltersSection /> {/* includes filter carousal + filter Btn */}
             <div><FloatButtonShowMap/></div>
             {/* <LocationAccessPopup /> */}
@@ -32,4 +32,4 @@ function PropertiesPage() {
     );
 }
 
-export default PropertiesPage;
+export default Home;

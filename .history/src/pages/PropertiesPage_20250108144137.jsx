@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import FloatButtonShowMap from '../components/FloatButtonShowMap'
 import FiltersSection from "../components/FiltersSection";
 
-function PropertiesPage() {
+function Pro() {
     const { properties } = useSelector((state) => state.properties);
     const { filteredProperties } = useSelector((state) => state.properties);
 
@@ -32,4 +32,4 @@ function PropertiesPage() {
     );
 }
 
-export default PropertiesPage;
+export default Pro;
