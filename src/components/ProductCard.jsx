@@ -149,14 +149,14 @@ const ProductCard = ({ property }) => {
                         window.location.href = `tel:${property?.phone}`; // Replace with the desired phone number
                     }}>
                         Connect
-                        <PiPhoneDisconnectThin size={16}/>
+                        <PiPhoneDisconnectThin size={16} />
                     </Button>
-                <div className="cursor-pointer"
-                    onClick={() => handleLocationClick(property?.latitude, property?.longitude)}>
-                    <FaLocationArrow size={28} color="black" />
+                    <div className="cursor-pointer"
+                        onClick={() => handleLocationClick(property?.latitude, property?.longitude)}>
+                        <FaLocationArrow size={28} color="black" />
+                    </div>
                 </div>
             </div>
-        </div>
         </div >
     );
 };
