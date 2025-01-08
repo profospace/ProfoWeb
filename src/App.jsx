@@ -45,7 +45,7 @@ function App() {
             <Route path='/properties' element={<PropertiesPage />} />
             <Route path='/about' element={<About />} />
             <Route path='/details/:post_id' element={<SinglePage />} />
-            <Route path='/gallery' element={<Gallery />} />
+            {/* <Route path='/gallery' element={<Gallery />} /> */}
           </Route>
         </Routes>
     </div>
