@@ -41,20 +41,20 @@
 
 import React from 'react';
 
-const NotFoundSection = () => {
+const CouldntFind = () => {
     return (
-        <div className="min-h-[300px] w-full bg-[#B0A6E6] relative overflow-hidden p-8 rounded-3xl">
+        <div className="min-h-[300px] w-full bg-[#ffacab] relative overflow-hidden px-8 py-0 rounded-xl">
             {/* Chevron Pattern Background */}
             <div
                 className="absolute inset-0 opacity-10"
                 style={{
                     backgroundImage: `linear-gradient(135deg, 
             transparent 25%, 
-            #9795CE 25%, 
-            #9795CE 50%, 
+            #CB0A01 25%, 
+            #CB0A01 50%, 
             transparent 50%, 
             transparent 75%, 
-            #9795CE 75%
+            #CB0A01 75%
           )`,
                     backgroundSize: '40px 40px'
                 }}
@@ -78,7 +78,7 @@ const NotFoundSection = () => {
     );
 };
 
-export default NotFoundSection;
+export default CouldntFind;
 
 // Optional: Add this CSS to your global styles for the exact font if needed
 // @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&display=swap');

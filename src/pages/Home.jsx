@@ -128,16 +128,16 @@ const Home = () => {
                 </div>
 
                 {/* Content Overlay */}
-                <div className="relative z-10 flex flex-col items-center justify-center py-4 px-0 sm:px-6 lg:px-8">
+                <div className="relative z-10 flex flex-col items-center justify-center py-2 px-0 sm:px-6 lg:px-8">
                     <div className="text-center max-w-7xl mx-auto">
-                        <h1 className="text-[2.7rem] sm:text-5xl md:text-6xl lg:text-[6rem] font-bold leading-[2.9rem] transition-all duration-300 animate-slide-up">
+                        <h1 className="text-[2.7rem] sm:text-5xl md:text-6xl lg:text-[5.8rem] font-bold leading-[2.9rem] transition-all duration-300 animate-slide-up">
                             Search Property
                         </h1>
-                        <h1 className="text-[2.7rem] sm:text-5xl md:text-6xl lg:text-[6rem] font-bold leading-[2.9rem]  transition-all duration-300 animate-slide-up-delay">
+                        <h1 className="text-[2.7rem] sm:text-5xl md:text-6xl lg:text-[5.8rem] font-bold leading-[2.9rem]  transition-all duration-300 animate-slide-up-delay">
                             On Map
                         </h1>
                         <div className="relative inline-block">
-                            <h1 className="text-[2.7rem] sm:text-5xl md:text-6xl lg:text-[6rem] font-bold leading-[2.9rem]  transition-all duration-300 animate-slide-up-delay-2">
+                            <h1 className="text-[2.7rem] sm:text-5xl md:text-6xl lg:text-[5.8rem] font-bold leading-[2.9rem]  transition-all duration-300 animate-slide-up-delay-2">
                                 Directly
                                 <img
                                     src="/assets/map.png"

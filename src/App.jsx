@@ -36,9 +36,9 @@ function App() {
   return (
     <div className='app '>
         {/* Custom Floating Button */}
-      <div className=''>
+      {/* <div className=''>
         <FloatButtonShowMap />
-      </div>
+      </div> */}
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />

@@ -4,7 +4,7 @@ import { SearchComponent } from './SearchComponent'
 import { useNavigate } from 'react-router-dom'
 
 const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
+    { name: 'Home', href: '#', current: true },
     { name: 'Team', href: '#', current: false },
     { name: 'Projects', href: '#', current: false },
     { name: 'Calendar', href: '#', current: false },
@@ -17,7 +17,7 @@ function classNames(...classes) {
 export default function Navbar() {
     const navigate = useNavigate()
     return (
-        <Disclosure as="nav" className="navbar">
+        <Disclosure as="nav" className="navbar py-4">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -29,7 +29,7 @@ export default function Navbar() {
                             <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-[open]:block" />
                         </DisclosureButton>
                     </div>
-                    <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                    <div className="flex flex-1 items-center justify-between sm:items-stretch sm:justify-between">
                         <div className="flex shrink-0 items-center cursor-pointer " onClick={()=>navigate('/')}>
                             <div className='flex items-center'>
                                 <img
@@ -49,9 +49,13 @@ export default function Navbar() {
                                         href={item.href}
                                         aria-current={item.current ? 'page' : undefined}
                                         className={classNames(
-                                            item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
-                                            'rounded-md px-3 py-2 text-sm font-medium',
+                                            item.current ? 'underline underline-offset-4' : 'text-black hover:bg-gray-700 hover:text-white',
+                                            'rounded-md px-3 py-1 text-xl font-medium',
                                         )}
+                                        // className={classNames(
+                                        //     item.current ? 'bg-gray-900 text-white' : 'text-black hover:bg-gray-700 hover:text-white',
+                                        //     'rounded-md px-3 py-2 text-sm font-medium',
+                                        // )}
                                     >
                                         {item.name}
                                     </a>
