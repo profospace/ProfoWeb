@@ -262,9 +262,9 @@ const FiltersSection = () => {
   };
 
   return (
-    <div className="w-full bg-white shadow-sm">
+    <div className="w-full bg-white">
       <div className="max-w-screen-2xl mx-auto">
-        <div className="relative px-4 py-4 md:px-6 lg:px-8">
+        <div className="relative px-4 md:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             {/* Scrollable Filter Section */}
             <div className="flex-1 overflow-x-auto hide-scrollbar">

@@ -109,6 +109,7 @@ import PropertyCard from '../components/PropertyCard';
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import CouldntFind from '../components/CouldntFind';
+import AppDownload from '../components/AppDownload';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -198,6 +199,9 @@ const Home = () => {
             {/* Contact Us If not found found what you lookking for */}
             <section className="container mx-auto px-2 py-12">
                 <CouldntFind />
+            </section>
+            <section className="py-12">
+                <AppDownload />
             </section>
 
         </div>

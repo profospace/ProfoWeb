@@ -215,3 +215,15 @@ body{
 
 
 
+
+          /* appdownload */
+
+
+.appdownload {
+  background: linear-gradient(135deg, #FF416C, #FF4B2B);
+  /* background: linear-gradient(135deg, #fc0a2a, #feacb5); */
+  /* Optional: Add padding, height, or other styling */
+  padding: 20px;
+  color: #ffffff;
+  text-align: center;
+}
