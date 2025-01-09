@@ -13,13 +13,40 @@
 }
 
 * {
-    font-family: 'Zin Display Font';
+  font-family: 'Zin Display Font';
 } */
 
 :root {
-            --mouse-x: 50%;
-            --mouse-y: 50%;
-          }
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+/*Adding custom scrollbar */
+/* For Firefox */
+* {
+  scrollbar-width: thin;             /* Makes the scrollbar thinner */
+  scrollbar-color: #B9B7BF #f4f4f4;  /* thumb color track color */
+}
+/* For Chrome, Safari, and Edge */
+::-webkit-scrollbar {
+  width: 12px;              /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f4f4;      /* Background of the track */
+  border-radius: 10px;      /* Optional: Rounded corners */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B9B7BF;      /* Scrollbar color */
+  border-radius: 40px;      /* Rounded corners for thumb */
+  border: 2px solid #f4f4f4; /* Creates padding around thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #000;      /* Darker color on hover */
+}
+
 
 
 
@@ -167,6 +194,12 @@ body{
               #FFF9F8 45%,
               #FFFFFF 100%
             );
+             /* background: radial-gradient(
+              40% 40% at var(--mouse-x) var(--mouse-y),
+              #ffc5b9 0%,
+              #ffbeb3 45%,
+              #ffc4c4 100%
+            ); */
             min-height: 100vh;
             transition: background 0.2s ease-out;
             cursor: pointer;
@@ -227,3 +260,5 @@ body{
   color: #ffffff;
   text-align: center;
 }
+
+

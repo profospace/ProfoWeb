@@ -34,7 +34,7 @@ function App() {
   )
 
   return (
-    <div className='app '>
+    <div className=''>
         {/* Custom Floating Button */}
       {/* <div className=''>
         <FloatButtonShowMap />
