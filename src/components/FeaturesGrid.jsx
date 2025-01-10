@@ -2,7 +2,7 @@ import React from 'react';
 
 const FeaturesGrid = () => {
     return (
-        <div className="container mx-auto px-2 py-12">
+        <div className="container mx-auto px-2">
             <h1 className="text-3xl md:text-4xl font-serif text-center mb-8 text-gray-900">
                 What Makes Us Different?
             </h1>

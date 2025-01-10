@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Modal } from 'antd';
 import { Button } from "@material-tailwind/react";
 import { IconButton } from '@material-tailwind/react';
@@ -63,7 +63,7 @@ const typeNameIconMap = {
 // Fallback icon for unknown types
 const fallbackTypeIcon = <FaHome size={25} />;
 
-const FilterComponent = ({ modalOpen, setModalOpen }) => {
+const FilterComponent = ({ modalOpen, setModalOpen, activeSection, setActiveSection }) => {
     const dispatch = useDispatch()
     const [filterRanges , setFilterRanges] = useState({})
     const [priceRange, setPriceRange] = useState({
@@ -71,6 +71,8 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
         max: 0,
     });
     const { properties } = useSelector(state => state.properties)
+
+    
 
     console.log(filterRanges)
     /* calculating properties Keys to show dynAMIC range filter */
@@ -282,6 +284,40 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
         dispatch(getAllFilteredProperties(filters))
     }
 
+    const scrollContainerRef = useRef(null);
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!scrollContainerRef.current) return;
+
+            const sections = scrollContainerRef.current.querySelectorAll('.filter-section');
+            const containerTop = scrollContainerRef.current.getBoundingClientRect().top;
+
+            let currentSection = '';
+            sections.forEach((section) => {
+                const sectionTop = section.getBoundingClientRect().top - containerTop;
+                const sectionTitle = section.querySelector('h1')?.textContent;
+
+                if (sectionTop <= 50 && sectionTop > -100) {
+                    currentSection = sectionTitle;
+                }
+            });
+
+            if (currentSection && currentSection !== activeSection) {
+                setActiveSection(currentSection);
+            }
+        };
+
+        const scrollContainer = scrollContainerRef.current;
+        if (scrollContainer) {
+            scrollContainer.addEventListener('scroll', handleScroll);
+        }
+
+        return () => {
+            if (scrollContainer) {
+                scrollContainer.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, [activeSection, setActiveSection]);
 
     return (
         <Modal
@@ -299,10 +335,12 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
             <hr />
 
             {/* Scrollable Content Section */}
-            <div className="overflow-y-auto max-h-[400px] px-4">
+            <div className="hide-scrollbar max-h-[450px] px-4">
                 {/* Beds, Floors, and Bathrooms */}
-                <div className='py-4'>
-                    <h1 className='text-xl font-semibold'>Beds, Floors, and Bathrooms</h1>
+                {/* <div className='py-4'> */}
+                <div className={`filter-section py-4 transition-all duration-300 ${activeSection === 'Beds, Floors, and Bathrooms' ? 'section-highlight rounded-lg p-4 mt-2' : ''
+                    }`}>
+                    <h1 className='text-xl font-semibold'>Beds and Bathrooms</h1>
 
                     {/* Beds */}
                     <div className='flex justify-between items-center py-2 mb-1'>
@@ -319,7 +357,7 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                     </div>
 
                     {/* Floors */}
-                    <div className='flex justify-between items-center py-2 mb-1'>
+                    {/* <div className='flex justify-between items-center py-2 mb-1'>
                         <div className='text-xl'>Floors</div>
                         <div className='flex items-center gap-3'>
                             <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => decrementFilter('floor')} disabled={filters?.floor < 1}>
@@ -330,7 +368,7 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                                 <FaPlus />
                             </IconButton>
                         </div>
-                    </div>
+                    </div> */}
 
                     {/* Bathrooms */}
                     <div className='flex justify-between items-center py-2 mb-1'>
@@ -349,9 +387,28 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                     <hr />
                 </div>
 
+                    {/* floor */}
+                <div className={`filter-section py-4 transition-all duration-300 ${activeSection === 'Floor' ? 'section-highlight rounded-lg p-4 mt-2' : ''
+                    }`}>
+
+                    <div className='flex justify-between items-center py-2 mb-1'>
+                        <div className='text-xl font-semibold'>Floors</div>
+                        <div className='flex items-center gap-3'>
+                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => decrementFilter('floor')} disabled={filters?.floor < 1}>
+                                <FaMinus />
+                            </IconButton>
+                            <div className='text-xl text-center min-w-10'>{filters.floor ? filters.floor + '+ ' : "Any"}</div>
+                            <IconButton variant="outlined" className="rounded-full w-8 h-8" onClick={() => incrementFilter('floor')} disabled={filterRanges?.maxfloor == filters.floor} >
+                                <FaPlus />
+                            </IconButton>
+                        </div>
+                    </div>
+                    <hr />
+
+                    </div>
 
                         {/* Purpose - buy,rent ,sale */}
-                <div className='py-4'>
+                <div className={`py-4 transition-all duration-300 ${activeSection === 'Purpose' ? 'section-highlight rounded-lg p-4 mt-2' : ''}`}>
                     <h1 className='text-xl font-semibold'>Purpose</h1>
                     <div className="flex gap-2 flex-wrap py-4">
                         {
@@ -380,7 +437,8 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
 
 
                 {/* Amenities */}
-                <div className='py-4'>
+                {/* <div className='py-4'> */}
+                <div className={`py-4 transition-all duration-300 ${activeSection === 'Amenities' ? 'section-highlight rounded-lg p-4 mt-2' : ''}`}>
                     <h1 className='text-xl font-semibold'>Amenities</h1>
                     <div className="flex gap-2 flex-wrap py-4">
                         {
@@ -408,7 +466,8 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                 </div>
 
                 {/* Property Type */}
-                <div className='py-4'>
+                {/* <div className='py-4'> */}
+                <div className={`py-4 transition-all duration-300 ${activeSection === 'Property Type' ? 'section-highlight rounded-lg p-4 mt-2' : ''}`}>
                     <h1 className='text-xl font-semibold'>Property Type</h1>
                     <div className="flex gap-2 flex-wrap py-4">
                         {
@@ -435,7 +494,9 @@ const FilterComponent = ({ modalOpen, setModalOpen }) => {
                 </div>
 
                 {/* Price range */}
-                <div className="py-4">
+                {/* <div className="py-4"> */}
+                <div className={`filter-section py-4 transition-all duration-300 ${activeSection === 'Price Range' ? 'section-highlight rounded-lg p-4 mt-2' : ''
+                    }`}>
                     <h1 className="text-xl font-semibold">Price Range</h1>
                     <RangeSlider
                         minPrice={filters.priceMin}

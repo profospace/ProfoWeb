@@ -118,7 +118,7 @@ const Home = () => {
     return (
         <div className="w-full min-h-screen">
             {/* Hero Section */}
-            <div className="relative w-full  bg-white overflow-hidden px-4 sm:px-6 lg:px-8">
+            <div className="relative w-full lg:min-h-screen h-[50vh] bg-white overflow-hidden px-4 sm:px-6 lg:px-8">
                 {/* Background Image */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-60">
                     <img
@@ -151,17 +151,25 @@ const Home = () => {
                             Fully furnished, designer homes with no brokerage, low deposits, and zero hassle. Just bring
                             your clothes & you're all set.
                         </p>
+                        <div className="flex justify-center">
+                            <button
+                                onClick={() => navigate('/properties')}
+                                className="see-all-button text-white px-6 sm:px-8 py-3 rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            >
+                                See All Properties
+                            </button>
+                        </div>
                     </div>
 
                     {/* Search Bar */}
-                    <div className="mt-4 sm:mt-6 w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto px-0">
+                    {/* <div className="mt-4 sm:mt-6 w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto px-0">
                         <SearchBar />
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
             {/* Properties Section */}
-            <div className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+            {/* <div className="relative py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid gap-6 sm:gap-8 property-grid">
                         {properties?.slice(0, 6).map((property) => (
@@ -169,7 +177,6 @@ const Home = () => {
                         ))}
                     </div>
 
-                    {/* See All Properties Button */}
                     <div className="flex justify-center mt-16">
                         <button
                             onClick={() => navigate('/properties')}
@@ -179,7 +186,7 @@ const Home = () => {
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* Property Type Section */}
             {/* <section className="py-12 sm:py-16">
@@ -187,20 +194,20 @@ const Home = () => {
             </section> */}
 
             {/* Features Section */}
-            <section className="py-12 sm:py-16 bg-gray-50">
+            <section className="py-6 bg-gray-50">
                 <FeaturesGrid />
             </section>
 
             {/* Why Choose Section */}
-            <section className="py-12 sm:py-16">
+            <section className="py-6">
                 <WhyChooseOfoSpace />
             </section>
 
             {/* Contact Us If not found found what you lookking for */}
-            <section className="container mx-auto px-2 py-12">
+            <section className="container mx-auto px-2 py-4">
                 <CouldntFind />
             </section>
-            <section className="py-12">
+            <section className="py-6">
                 <AppDownload />
             </section>
 

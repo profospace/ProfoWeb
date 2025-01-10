@@ -262,3 +262,24 @@ body{
 }
 
 
+/* ********************** */
+
+@keyframes gentlePulse {
+  0% { background-color: transparent; }
+  50% { background-color: rgb(254, 219, 219); } 
+  100% { background-color: transparent; }
+}
+
+.section-highlight {
+  animation: gentlePulse 5s ease-in-out;
+}
+
+.hide-scrollbar {
+  overflow: auto;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}

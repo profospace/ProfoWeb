@@ -13,7 +13,7 @@ const AppDownload = () => {
     };
 
     return (
-        <div className="bg-pink-400 flex items-center justify-center mt-24 py-6 appdownload">
+        <div className="bg-pink-400 flex items-center justify-center lg:mt-32 mt-6 py-6 appdownload">
             <div className="relative w-full max-w-6xl flex flex-col md:flex-row items-center justify-between gap-8 p-4">
                 {/* Left side with phone illustration */}
                 <div className="absolute left-0 w-full md:w-1/2 lg:flex md:flex hidden justify-center ">
@@ -30,11 +30,11 @@ const AppDownload = () => {
                 {/* Right side with content */}
                 <div className="w-full md:w-1/2 text-white ml-auto">
                     <h1 className="text-3xl md:text-4xl font-light mb-12">
-                        Download <span className="font-normal"> Profo App</span>
+                        Download <span className="font-normal"> PROFO App</span>
                     </h1>
 
                     <div className="grid grid-cols-3 gap-8 mb-12">
-                        <div className="flex flex-col items-center">
+                        <div className="flex flex-col items-center cursor-pointer">
                             <div className="w-12 h-12 border-2 border-dashed border-white rounded-full flex items-center justify-center mb-2">
                                 {/* <img
                                     src="/assets/alert-icon.png"
@@ -46,7 +46,7 @@ const AppDownload = () => {
                             </div>
                             <span className="text-sm text-center">Property alert</span>
                         </div>
-                        <div className="flex flex-col items-center">
+                        <div className="flex flex-col items-center cursor-pointer">
                             <div className="w-12 h-12 border-2 border-dashed border-white rounded-full flex items-center justify-center mb-2">
                                 {/* <img
                                     src="/assets/connect-icon.png"
@@ -57,7 +57,7 @@ const AppDownload = () => {
                             </div>
                             <span className="text-sm text-center">Instant connect</span>
                         </div>
-                        <div className="flex flex-col items-center">
+                        <div className="flex flex-col items-center cursor-pointer">
                             <div className="w-12 h-12 border-2 border-dashed border-white rounded-full flex items-center justify-center mb-2">
                                 {/* <img
                                     src="/assets/favorite-icon.png"

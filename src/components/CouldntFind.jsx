@@ -43,7 +43,7 @@ import React from 'react';
 
 const CouldntFind = () => {
     return (
-        <div className="min-h-[300px] w-full bg-[#ffacab] relative overflow-hidden px-8 py-0 rounded-xl">
+        <div className="min-h-[300px] w-full bg-[#ffacab] relative overflow-hidden mt-4 px-8 py-0 rounded-xl">
             {/* Chevron Pattern Background */}
             <div
                 className="absolute inset-0 opacity-10"

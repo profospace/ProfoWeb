@@ -17,7 +17,7 @@ const WhyChooseOfoSpace = () => {
     return (
         <div className="relative">
             
-            <div className="gradient-bg py-16 px-4 md:px-8">
+            <div className="gradient-bg py-6 px-4 md:px-8">
                 <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[1fr,2fr] gap-x-20 gap-y-12">
                     {/* Left side - Title */}
                     <div>
