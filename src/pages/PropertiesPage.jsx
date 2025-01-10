@@ -1,21 +1,29 @@
 import React from "react";
 import LocationAccessPopup from "../components/LocationAccessPopup";
 import ProductCard from "../components/ProductCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FloatButtonShowMap from '../components/FloatButtonShowMap'
 import FiltersSection from "../components/FiltersSection";
 import PropertyCard from "../components/PropertyCard";
+import { getAllProperties } from "../redux/features/Properties/propertiesSlice";
 
 function PropertiesPage() {
+    const dispatch = useDispatch()
     const { properties } = useSelector((state) => state.properties);
-    const { filteredProperties } = useSelector((state) => state.properties);
-
+    const { filteredProperties, currentPage, totalCount, totalPages } = useSelector((state) => state.properties);
     // Determine which list to render
     const propertiesToDisplay = filteredProperties?.length > 0 ? filteredProperties : properties;
+    console.log(propertiesToDisplay)
+
+
+    const handleLoadMore = () => {
+        dispatch(getAllProperties(currentPage + 1))
+
+    }
 
     return (
         <div className="w-full h-full bg-white">
-            <FiltersSection /> 
+            <FiltersSection />
             {/* <div><FloatButtonShowMap/></div> */}
             {/* <LocationAccessPopup /> */}
             {/* <div className="grid gap-6 p-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4"> */}
@@ -30,6 +38,18 @@ function PropertiesPage() {
                     </div>
                 )}
             </div>
+
+            {currentPage <= totalPages - 1 && (
+                <div className="flex justify-center mt-6">
+                    <button
+                        onClick={handleLoadMore}
+                        className="px-6 py-3 bg-[#CB0A01] text-white rounded-lg shadow-md hover:bg-[#080808] transition-all duration-200 focus:outline-none"
+                    >
+                        Load More
+                    </button>
+                </div>
+            )}
+
         </div>
     );
 }

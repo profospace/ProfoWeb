@@ -79,7 +79,7 @@ const FilterComponent = ({ modalOpen, setModalOpen, activeSection, setActiveSect
     const calculatingFiltersValues = () => {
         if (!properties || properties.length === 0) return;
 
-        const result = properties.reduce(
+        const result = properties?.reduce(
             (acc, property) => {
                 if (property.bedrooms !== null && property.bedrooms !== undefined) {
                     acc.maxBedrooms = Math.max(acc.maxBedrooms, property.bedrooms);

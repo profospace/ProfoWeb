@@ -18,16 +18,27 @@ const PropertyCard = ({ property }) => {
                     alt={property.address || 'Swaroop Nagar, Kanpur, Uttar Pradesh'}
                     className="w-full h-full object-cover"
                 />
-                <div className="absolute top-3 left-3 grid grid-cols-2 gap-1 place-items-center ">
+                {/* <div className="absolute top-3 left-3 grid grid-cols-2 gap-1 place-items-center ">
                     {property?.tags[0]  && <span className="bg-[#1E61D9] text-white px-4 py-[0.5px] rounded-full text-sm font-medium">
-                        {/* New - {property.timePosted || '8 hours ago'} */}
                         {property?.tags[0] || "Super"}
                     </span>}
                     {property?.tags[0] && <span className="bg-[#1E61D9] text-white px-4 py-[0.5px] rounded-full text-sm font-medium">
-                        {/* New - {property.timePosted || '8 hours ago'} */}
                         {property?.tags[0] || "Great"}
                     </span>}
+                </div> */}
+                <div className="absolute top-3 left-3 grid grid-cols-2 gap-1 place-items-center">
+                    {property?.tags?.length > 0 && (
+                        <>
+                            <span className="bg-[#1E61D9] text-white px-4 py-[0.5px] rounded-full text-sm font-medium">
+                                {property.tags[0] || "Super"}
+                            </span>
+                            <span className="bg-[#1E61D9] text-white px-4 py-[0.5px] rounded-full text-sm font-medium">
+                                {property.tags[1] || "Great"}
+                            </span>
+                        </>
+                    )}
                 </div>
+
                 <button className="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-50 transition-colors">
                     <Heart className="w-5 h-5 text-gray-600" />
                 </button>
@@ -74,7 +85,7 @@ const PropertyCard = ({ property }) => {
                     <p className="text-gray-700">{property.address || 'Swaroop Nagar, Kanpur, Uttar Pradesh'}</p>
                 </div>
 
-                <div className='grid grid-cols-6 gap-2 items-center'>
+                {/* <div className='grid grid-cols-6 gap-2 items-center'>
                     <button className="col-span-5 w-full py-2.5 px-4 border-2 border-gray-900 rounded-full text-gray-900 font-medium hover:bg-gray-900 hover:text-white transition-colors flex items-center justify-center gap-2">
                         <Mail className="w-4 h-4" />
                         Email Agent
@@ -82,7 +93,7 @@ const PropertyCard = ({ property }) => {
                     <button className="w-full py-1 px-2 border-2 rounded-full text-gray-900 font-medium hover:bg-gray-900 hover:text-white flex items-center justify-center gap-2">
                         <FaLocationArrow size={35} color="black" />
                     </button>
-                </div>
+                </div> */}
             </div>
         </div>
     );
