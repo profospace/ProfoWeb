@@ -24,7 +24,7 @@ function PropertiesPage() {
     return (
         <div className="w-full h-full bg-white">
             <FiltersSection />
-            {/* <div><FloatButtonShowMap/></div> */}
+            <div><FloatButtonShowMap/></div>
             {/* <LocationAccessPopup /> */}
             {/* <div className="grid gap-6 p-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4"> */}
             <div className="grid property-grid gap-6 px-4 py-4">

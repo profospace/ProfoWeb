@@ -18,15 +18,15 @@ const PropertyCard = ({ property }) => {
                     alt={property.address || 'Swaroop Nagar, Kanpur, Uttar Pradesh'}
                     className="w-full h-full object-cover"
                 />
-                {/* <div className="absolute top-3 left-3 grid grid-cols-2 gap-1 place-items-center ">
-                    {property?.tags[0]  && <span className="bg-[#1E61D9] text-white px-4 py-[0.5px] rounded-full text-sm font-medium">
+                <div className="absolute top-3 left-3 grid grid-cols-2 gap-1 place-items-center ">
+                    {property?.tags?.length > 0  && <span className="bg-[#1E61D9] text-white px-4 py-[0.5px] rounded-full text-sm font-medium">
                         {property?.tags[0] || "Super"}
                     </span>}
-                    {property?.tags[0] && <span className="bg-[#1E61D9] text-white px-4 py-[0.5px] rounded-full text-sm font-medium">
-                        {property?.tags[0] || "Great"}
+                    {property?.tags?.length > 0 && <span className="bg-[#1E61D9] text-white px-4 py-[0.5px] rounded-full text-sm font-medium">
+                        {property?.tags[1] || "Great"}
                     </span>}
-                </div> */}
-                <div className="absolute top-3 left-3 grid grid-cols-2 gap-1 place-items-center">
+                </div>
+                {/* <div className="absolute top-3 left-3 grid grid-cols-2 gap-1 place-items-center">
                     {property?.tags?.length > 0 && (
                         <>
                             <span className="bg-[#1E61D9] text-white px-4 py-[0.5px] rounded-full text-sm font-medium">
@@ -37,7 +37,7 @@ const PropertyCard = ({ property }) => {
                             </span>
                         </>
                     )}
-                </div>
+                </div> */}
 
                 <button className="absolute top-3 right-3 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-md hover:bg-gray-50 transition-colors">
                     <Heart className="w-5 h-5 text-gray-600" />
