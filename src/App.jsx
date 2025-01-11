@@ -16,6 +16,8 @@ import FloatButtonShowMap from './components/FloatButtonShowMap'
 /* redux */
 import { useDispatch } from 'react-redux';
 import { getAllProperties } from './redux/features/Properties/propertiesSlice';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 function App() {
   const dispatch = useDispatch()
@@ -40,6 +42,8 @@ function App() {
         <FloatButtonShowMap />
       </div> */}
         <Routes>
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/login' element={<Login />} />
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path='/properties' element={<PropertiesPage />} />

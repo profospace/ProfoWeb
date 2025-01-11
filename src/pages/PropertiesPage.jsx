@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LocationAccessPopup from "../components/LocationAccessPopup";
 import ProductCard from "../components/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ function PropertiesPage() {
     const { filteredProperties, currentPage, totalCount, totalPages } = useSelector((state) => state.properties);
     // Determine which list to render
     const propertiesToDisplay = filteredProperties?.length > 0 ? filteredProperties : properties;
+    const [show , setShow] = useState(true) // if map open properties will be hidden and vice-verse
     console.log(propertiesToDisplay)
 
 
@@ -24,10 +25,10 @@ function PropertiesPage() {
     return (
         <div className="w-full h-full bg-white">
             <FiltersSection />
-            <div><FloatButtonShowMap/></div>
+            <div><FloatButtonShowMap setShow={setShow}/></div>
             {/* <LocationAccessPopup /> */}
             {/* <div className="grid gap-6 p-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4"> */}
-            <div className="grid property-grid gap-6 px-4 py-4">
+            {show &&  <div className="grid property-grid gap-6 px-4 py-4">
                 {propertiesToDisplay?.length > 0 ? (
                     propertiesToDisplay?.map((property) => (
                         <PropertyCard key={property._id} property={property} />
@@ -37,7 +38,7 @@ function PropertiesPage() {
                         No properties available to display.
                     </div>
                 )}
-            </div>
+            </div>}
 
             {currentPage <= totalPages - 1 && (
                 <div className="flex justify-center mt-6">

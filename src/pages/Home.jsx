@@ -154,7 +154,7 @@ const Home = () => {
                         <div className="flex justify-center">
                             <button
                                 onClick={() => navigate('/properties')}
-                                className="see-all-button text-white px-6 sm:px-8 py-3 rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                                className="see-all-button mt-12 text-white px-6 sm:px-8 py-3 rounded-full font-medium text-base sm:text-lg transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                             >
                                 See All Properties
                             </button>

@@ -1831,7 +1831,7 @@ import { useSelector } from "react-redux";
 import { GoogleMap, LoadScript, OverlayView, Circle } from "@react-google-maps/api";
 import { useNavigate } from "react-router-dom";
 
-const FloatButtonShowMap = () => {
+const FloatButtonShowMap = ({setShow}) => {
     const googleApiKey = import.meta.env.VITE_GOOGLE_API_KEY;
 
     const { properties } = useSelector((state) => state.properties);
@@ -1847,6 +1847,7 @@ const FloatButtonShowMap = () => {
 
     const toggleMap = () => {
         setShowMap((prev) => !prev);
+        setShow((prev)=> !prev)
         if (!showMap) setSelectedProperty(null);
     };
 
@@ -2077,7 +2078,7 @@ const FloatButtonShowMap = () => {
             </button>
 
             <div
-                className={`fixed bottom-0 left-0 w-full h-[87vh] bg-white shadow-lg z-40 
+                className={`fixed bottom-0 left-0 w-full h-[75vh] bg-white shadow-lg z-40 
                          transition-transform duration-500 ${showMap ? "translate-y-0" : "translate-y-full"}`}
             >
                 <button
