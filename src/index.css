@@ -221,12 +221,12 @@ body{
 .see-all-button {
             background: linear-gradient(90deg, #1a365d 0%, #2d3748 100%);
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
-            transform: translateY(50%);
+            /* transform: translateY(50%); */
           }
           
-          .see-all-button:hover {
+          /* .see-all-button:hover {
             background: linear-gradient(90deg, #2d3748 0%, #1a365d 100%);
-          }
+          } */
 
           @media (max-width: 640px) {
             .property-grid {
