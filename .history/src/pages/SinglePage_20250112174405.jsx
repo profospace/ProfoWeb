@@ -411,7 +411,6 @@ const SinglePage = () => {
     const { propertyDetail } = useSelector(state => state.properties);
     const [images, setImages] = useState([]);
     const [isPopupVisible, setIsPopupVisible] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(false); // Control animation state
 
     console.log(propertyDetail)
     // Map configuration
@@ -511,14 +510,11 @@ const SinglePage = () => {
     };
 
     const handleButtonClick = () => {
-        setIsPopupVisible(true); // Show popup
-        setIsAnimating(true); // Start animation
+        setIsPopupVisible(true);
     };
 
-    const handleClose = () => {
-        setIsAnimating(false); // Trigger animation out
-        // setTimeout(() => setIsPopupVisible(false), 100); // Hide popup after animation
-        setIsPopupVisible(false)
+    const closePopup = () => {
+        setIsPopupVisible(false);
     };
 
     return (
@@ -776,8 +772,7 @@ const SinglePage = () => {
                 <div className="col-span-4">
                     <div className="sticky top-24">
                         <RealEstateListing
-                            
-                            handleButtonClick={handleButtonClick}
+                            onClick={handleButtonClick}
                             price={propertyDetail?.price}
                             title={`${propertyDetail?.bathrooms} Baths ${propertyDetail?.bedrooms} Beds ${propertyDetail?.floor} Floors`}
                             location={propertyDetail?.address}
@@ -790,13 +785,8 @@ const SinglePage = () => {
 
 
              {
-                isPopupVisible && <div onClick={handleClose} className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-                    <div
-                        className={` rounded-lg shadow-xl p-6 w-full  transform transition-transform duration-300 ${isAnimating ? "scale-100 opacity-100" : "scale-90 opacity-0"
-                            }`}
-                    >
+                isPopupVisible && <div>
                     <BuilderContactCard propertyDetail={propertyDetail} />
-                </div>
                 </div>
              }
 

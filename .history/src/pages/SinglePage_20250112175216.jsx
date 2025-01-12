@@ -517,8 +517,7 @@ const SinglePage = () => {
 
     const handleClose = () => {
         setIsAnimating(false); // Trigger animation out
-        // setTimeout(() => setIsPopupVisible(false), 100); // Hide popup after animation
-        setIsPopupVisible(false)
+        setTimeout(() => setIsPopupVisible(false), 300); // Hide popup after animation
     };
 
     return (

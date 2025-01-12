@@ -517,8 +517,7 @@ const SinglePage = () => {
 
     const handleClose = () => {
         setIsAnimating(false); // Trigger animation out
-        // setTimeout(() => setIsPopupVisible(false), 100); // Hide popup after animation
-        setIsPopupVisible(false)
+        setTimeout(() => setIsPopupVisible(false), 300); // Hide popup after animation
     };
 
     return (
@@ -790,9 +789,9 @@ const SinglePage = () => {
 
 
              {
-                isPopupVisible && <div onClick={handleClose} className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                isPopupVisible && <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div
-                        className={` rounded-lg shadow-xl p-6 w-full  transform transition-transform duration-300 ${isAnimating ? "scale-100 opacity-100" : "scale-90 opacity-0"
+                        className={`bg-white rounded-lg shadow-xl p-6 w-full  transform transition-transform duration-300 ${isAnimating ? "scale-100 opacity-100" : "scale-90 opacity-0"
                             }`}
                     >
                     <BuilderContactCard propertyDetail={propertyDetail} />

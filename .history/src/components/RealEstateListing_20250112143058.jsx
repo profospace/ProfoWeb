@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Clock, Heart } from 'lucide-react';
 
-const RealEstateListing = ({ handleButtonClick }) => {
+const RealEstateListing = () => {
     const [isLiked, setIsLiked] = useState(false);
 
     return (
@@ -37,7 +37,7 @@ const RealEstateListing = ({ handleButtonClick }) => {
                 </span>
             </div>
 
-            <button onClick={handleButtonClick} className="w-full bg-yellow-400 hover:bg-yellow-500 py-3 rounded-lg mb-6">
+            <button className="w-full bg-yellow-400 hover:bg-yellow-500 py-3 rounded-lg mb-6">
                 Show phone +7 (xxx) xxx-xx-xx
             </button>
 

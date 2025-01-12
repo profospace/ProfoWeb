@@ -412,7 +412,7 @@ const SinglePage = () => {
     const [images, setImages] = useState([]);
     const [isPopupVisible, setIsPopupVisible] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false); // Control animation state
-
+    
     console.log(propertyDetail)
     // Map configuration
     const mapCenter = {
@@ -511,14 +511,11 @@ const SinglePage = () => {
     };
 
     const handleButtonClick = () => {
-        setIsPopupVisible(true); // Show popup
-        setIsAnimating(true); // Start animation
+        setIsPopupVisible(true);
     };
 
-    const handleClose = () => {
-        setIsAnimating(false); // Trigger animation out
-        // setTimeout(() => setIsPopupVisible(false), 100); // Hide popup after animation
-        setIsPopupVisible(false)
+    const closePopup = () => {
+        setIsPopupVisible(false);
     };
 
     return (
@@ -790,10 +787,12 @@ const SinglePage = () => {
 
 
              {
-                isPopupVisible && <div onClick={handleClose} className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                isPopupVisible && <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
                     <div
-                        className={` rounded-lg shadow-xl p-6 w-full  transform transition-transform duration-300 ${isAnimating ? "scale-100 opacity-100" : "scale-90 opacity-0"
-                            }`}
+                        className="bg-white rounded-lg shadow-xl p-6 max-w-lg w-full transform transition-transform duration-300 scale-100"
+                        onAnimationEnd={(e) => {
+                            if (e.animationName === "fadeOut") closePopup();
+                        }}
                     >
                     <BuilderContactCard propertyDetail={propertyDetail} />
                 </div>

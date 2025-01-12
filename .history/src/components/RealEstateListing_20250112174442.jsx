@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MapPin, Clock, Heart } from 'lucide-react';
 
-const RealEstateListing = ({ handleButtonClick }) => {
+const RealEstateListing = () => {
     const [isLiked, setIsLiked] = useState(false);
 
     return (
