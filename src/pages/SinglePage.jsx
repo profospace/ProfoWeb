@@ -332,7 +332,7 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import "swiper/css";
 import { PiDotsNineBold, PiUploadSimpleLight } from "react-icons/pi";
 import { CarouselImages } from "../components/CarousalImages";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProperty } from "../redux/features/Properties/propertiesSlice";
 
@@ -349,6 +349,10 @@ import PropertyAminities from "../components/PropertyAminities";
 import { AiOutlineUpload } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
 import BuilderContactCard from "../components/BuilderContactCard";
+import { Dialog } from "@headlessui/react";
+import ShareableCard from "../components/ShareableCard";
+import ShareOptions from "../components/ShareOptions";
+import { base_url } from "../utils/base_url";
 
 export const FacilitiesSection = ({ facilities }) => {
     // Icon mapping for facilities
@@ -521,6 +525,19 @@ const SinglePage = () => {
         setIsPopupVisible(false)
     };
 
+
+    const [isShareOpen, setIsShareOpen] = useState(false);
+    const { pathname } = useLocation()
+
+    const propertyInfo = {
+        title: "Luxurious 2BHK Apartment",
+        description: "Spacious and well-lit apartment in the heart of the city.",
+        image: propertyDetail?.galleryList?.[0],
+        link: `http://localhost:5173${pathname}`,
+    };
+
+    
+
     return (
         <div className="mx-8">
             {/* Title */}
@@ -530,10 +547,36 @@ const SinglePage = () => {
                 </h1>
 
                 <div className="flex gap-4">
-                    <div className="flex items-center font-semibold gap-1 cursor-pointer hover:bg-gray-300 px-3 text-md  rounded-md ">
+                    {/* <div className="flex items-center font-semibold gap-1 cursor-pointer hover:bg-gray-300 px-3 text-md  rounded-md ">
                         <PiUploadSimpleLight size={25} />
                         <p className="underline">Share</p>
+                    </div> */}
+                    <div>
+                        <div
+                            className="flex items-center font-semibold gap-1 cursor-pointer hover:bg-gray-300 px-3 text-md rounded-md"
+                            onClick={() => setIsShareOpen(true)}
+                        >
+                            <PiUploadSimpleLight size={25} />
+                            <p className="underline">Share</p>
+                        </div>
+                        {/* Modal */}
+                        {isShareOpen && (
+                            <Dialog open={isShareOpen} onClose={() => setIsShareOpen(false)}>
+                                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                                    <div className="p-4">
+                                        <ShareableCard
+                                            title={propertyInfo.title}
+                                            description={propertyInfo.description}
+                                            image={propertyInfo.image}
+                                            link={propertyInfo.link}
+                                        />
+                                        <ShareOptions />
+                                    </div>
+                                </div>
+                            </Dialog>
+                        )}
                     </div>
+
                     <div className="flex items-center font-semibold gap-1 cursor-pointer hover:bg-gray-300 px-3 text-md  rounded-md ">
                         <CiHeart size={25} />
                         <p className="underline">Share</p>

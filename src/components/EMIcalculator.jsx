@@ -36,7 +36,7 @@ const SliderInput = ({ label, value, setValue, min, max, step, format, leftLabel
     const percentage = ((value - min) / (max - min)) * 100;
 
     return (
-        <div className="space-y-2">
+        <div className="">
             <div className="flex justify-between items-center">
                 <label className="text-sm font-medium">{label}</label>
                 <span className="text-sm font-medium">{format ? format(value) : value}</span>

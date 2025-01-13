@@ -7,7 +7,7 @@ const PropertyCard = ({ property }) => {
     const navigate = useNavigate()
     // console.log(property)
     const handleCardClick = () => {
-        navigate(`/details/${property?.post_id}`); // Navigate to the route with the post ID
+        navigate(`/api/details/${property?.post_id}`); // Navigate to the route with the post ID
     };
     return (
         <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden" onClick={handleCardClick}>

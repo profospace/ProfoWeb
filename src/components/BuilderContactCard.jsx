@@ -190,7 +190,7 @@ const BuilderContactCard = ({ propertyDetail }) => {
                     <img
                         src={propertyDetail?.floor_plan_image || "/api/placeholder/200/400"}
                         alt="Floor Plan"
-                        className="w-full object-contain"
+                        className="w-full max-h-56 object-contain"
                     />
                 </div>
 
