@@ -18,6 +18,7 @@ import { useDispatch } from 'react-redux';
 import { getAllProperties } from './redux/features/Properties/propertiesSlice';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+import AllInOnePage from './pages/AllInOnePage';
 
 function App() {
   const dispatch = useDispatch()
@@ -48,6 +49,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path='/properties' element={<PropertiesPage />} />
             <Route path='/about' element={<About />} />
+            <Route path='/all-in-one-page' element={<AllInOnePage />} />
             <Route path='/api/details/:post_id' element={<SinglePage />} />
             {/* <Route path='/gallery' element={<Gallery />} /> */}
           </Route>
