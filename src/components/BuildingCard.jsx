@@ -57,54 +57,63 @@
 import React from 'react';
 import { CiHeart } from 'react-icons/ci';
 import { MdCrueltyFree } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
 
-const AllInOneCard = ({
+function BuildingCard({
     name, ownerName, type, galleryList, developmentStatus, freeProperties, totalFloors, totalProperties
+    , buildingId
+}) {
+    const navigate = useNavigate()
 
-}) => (
-    <div className="relative w-full max-w-[280px] md:max-w-[240px] lg:max-w-[280px] cursor-pointer group">
-        <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-md">
-            <img
-                src={galleryList?.[0] || 'assets/testing.avif'}
-                alt={name}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute top-3 left-3 bg-white px-2 py-0 rounded-md shadow-sm">
-                <span className="text-blue-500 font-medium text-xs">{type}</span>
-            </div>
-            <button className="absolute top-3 right-3 w-7 h-7rounded-full flex items-center justify-center  transition-colors">
-                <CiHeart color='white' />
-            </button>
-        </div>
+    const handleCardClick = () => {
+        navigate(`/api/details/building/${buildingId}`); // Navigate to the route with the post ID
+    };
+    
 
-        <div className="my-2">
-            <div className='flex justify-between'>
-                <div className="font-md text-xl font-semibold text-gray-900 capitalize">
-                    {ownerName}
-                </div>
-                <div className="bg-white px-2 py-0 rounded-md shadow-sm">
-                    <span className="text-blue-500 font-medium text-xs capitalize">{developmentStatus}</span>
-                </div>
-            </div>
+  return (
+      <div className="relative w-full max-w-[280px] md:max-w-[240px] lg:max-w-[280px] cursor-pointer group" onClick={handleCardClick}>
+          <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-md">
+              <img
+                  src={galleryList?.[0] || 'assets/testing.avif'}
+                  alt={name}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+              <div className="absolute top-3 left-3 bg-white px-2 py-0 rounded-md shadow-sm">
+                  <span className="text-blue-500 font-medium text-xs">{type}</span>
+              </div>
+              <button className="absolute top-3 right-3 w-7 h-7rounded-full flex items-center justify-center  transition-colors">
+                  <CiHeart color='white' />
+              </button>
+          </div>
 
-            <div className="text-sm font-medium text-gray-800 truncate">{name}</div>
+          <div className="my-2">
+              <div className='flex justify-between'>
+                  <div className="font-md text-xl font-semibold text-gray-900 capitalize">
+                      {ownerName}
+                  </div>
+                  <div className="bg-white px-2 py-0 rounded-md shadow-sm">
+                      <span className="text-blue-500 font-medium text-xs capitalize">{developmentStatus}</span>
+                  </div>
+              </div>
 
-            <div className="flex items-center space-x-2">
-            <div className='flex gap-4 mt-2'>
-                    <div className='text-center'>
-                        <div className='text-xs font-semibold'>{freeProperties || 0}</div>
-                        <div className='text-[10px] '>Free Properties</div>
-                    </div>
-                    <div className='text-center'>
-                        <div className='text-xs font-semibold'>{totalFloors || 0}</div>
-                        <div className='text-[10px] '>Total Floors</div>
-                    </div>
-                    <div className='text-center'>
-                        <div className='text-xs font-semibold'>{totalProperties || 0}</div>
-                        <div className='text-[10px] '>Total Properties</div>
-                    </div>
-            </div>
-                {/* <div
+              <div className="text-sm font-medium text-gray-800 truncate">{name}</div>
+
+              <div className="flex items-center space-x-2">
+                  <div className='flex gap-4 mt-2'>
+                      <div className='text-center'>
+                          <div className='text-xs font-semibold'>{freeProperties || 0}</div>
+                          <div className='text-[10px] '>Free Properties</div>
+                      </div>
+                      <div className='text-center'>
+                          <div className='text-xs font-semibold'>{totalFloors || 0}</div>
+                          <div className='text-[10px] '>Total Floors</div>
+                      </div>
+                      <div className='text-center'>
+                          <div className='text-xs font-semibold'>{totalProperties || 0}</div>
+                          <div className='text-[10px] '>Total Properties</div>
+                      </div>
+                  </div>
+                  {/* <div
                     className={`w-4 h-4 rounded-full flex-shrink-0 ${metroLine === 'red'
                             ? 'bg-red-500'
                             : metroLine === 'purple'
@@ -112,10 +121,14 @@ const AllInOneCard = ({
                                 : 'bg-emerald-500'
                         }`}
                 /> */}
-                {/* <span className="text-gray-800 text-sm">{location}</span> */}
-            </div>
-        </div>
-    </div>
-);
+                  {/* <span className="text-gray-800 text-sm">{location}</span> */}
+              </div>
+          </div>
+      </div>
+  )
+}
 
-export default AllInOneCard;
+export default BuildingCard
+
+
+

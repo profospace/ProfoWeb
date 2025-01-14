@@ -14,8 +14,8 @@ const PropertyCard = ({ property }) => {
             {/* Property Image */}
             <div className="relative h-[240px] overflow-hidden">
                 <img
-                    src={property.galleryList[0] || '/assets/testing.avif'}
-                    alt={property.address || 'Swaroop Nagar, Kanpur, Uttar Pradesh'}
+                    src={property?.galleryList?.[0] || '/assets/testing.avif'}
+                    alt={property?.address || 'Swaroop Nagar, Kanpur, Uttar Pradesh'}
                     className="w-full h-full object-cover"
                 />
                 <div className="absolute top-3 left-3 grid grid-cols-2 gap-1 place-items-center ">
@@ -54,7 +54,7 @@ const PropertyCard = ({ property }) => {
 
                 <hr></hr>
                 <div className="my-3  flex items-center gap-5">
-                    <h3 className="text-2xl font-bold text-gray-900">${property.price}</h3>
+                    <h3 className="text-2xl font-bold text-gray-900">${property?.price}</h3>
                     {
                         property?.purpose && <span className="bg-green-800 text-white px-4 py-[0.5px] rounded-full text-sm font-medium">
                             {/* New - {property.timePosted || '8 hours ago'} */}
@@ -64,25 +64,25 @@ const PropertyCard = ({ property }) => {
                 </div>
                 <div className="flex items-center gap-4 my-3">
                     <div className="flex items-center gap-1">
-                        <span className="font-bold text-gray-900">{property.bedrooms || '2'}</span>
+                        <span className="font-bold text-gray-900">{property?.bedrooms || '2'}</span>
                         <span className="text-gray-600">bed</span>
                     </div>
                     <div className="flex items-center gap-1">
-                        <span className="font-bold text-gray-900">{property.bathrooms || '3'}</span>
+                        <span className="font-bold text-gray-900">{property?.bathrooms || '3'}</span>
                         <span className="text-gray-600">bath</span>
                     </div>
                     <div className="flex items-center gap-1">
-                        <span className="font-bold text-gray-900">{property.floor || '3'}</span>
+                        <span className="font-bold text-gray-900">{property?.floor || '3'}</span>
                         <span className="text-gray-600">floor</span>
                     </div>
                     <div className="flex items-center gap-1">
-                        <span className="font-bold text-gray-900">{property.area|| '2500'}</span>
-                        <span className="text-gray-600">{property.areaUnit || 'sqft'}</span>
+                        <span className="font-bold text-gray-900">{property?.area|| '2500'}</span>
+                        <span className="text-gray-600">{property?.areaUnit || 'sqft'}</span>
                     </div>
                 </div>
 
                 <div className="mb-4">
-                    <p className="text-gray-700">{property.address || 'Swaroop Nagar, Kanpur, Uttar Pradesh'}</p>
+                    <p className="text-gray-700">{property?.address || 'Swaroop Nagar, Kanpur, Uttar Pradesh'}</p>
                 </div>
 
                 {/* <div className='grid grid-cols-6 gap-2 items-center'>

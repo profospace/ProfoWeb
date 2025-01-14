@@ -3,6 +3,7 @@ import buildingsService from "./buildingsService";
 
 const initialState = {
   buildings: [],
+  buildingDetail: null,
   // currentPage : null,
   // totalCount: null,
   // totalPages : null,
@@ -26,29 +27,17 @@ export const getAllBuildings = createAsyncThunk(
   }
 );
 
-// filter
-// export const getAllFilteredProperties = createAsyncThunk(
-//   "properties/getAllFilteredProperties",
-//   async (filters, thunkAPI) => {
-//     try {
-//       return await propertiesService.getAllFilteredProperties(filters);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.response.data);
-//     }
-//   }
-// );
-
-// // get single property
-// export const getSingleProperty = createAsyncThunk(
-//   "properties/getSingleProperty",
-//   async (post_id, thunkAPI) => {
-//     try {
-//       return await propertiesService.getSingleProperty(post_id);
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.response.data);
-//     }
-//   }
-// );
+// get single property
+export const getSingleBuilding = createAsyncThunk(
+  "buildings/getSingleBuilding",
+  async (buildingId, thunkAPI) => {
+    try {
+      return await buildingsService.getSingleBuilding(buildingId);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  }
+);
 
 
 const buildingsSlice = createSlice({
@@ -72,34 +61,21 @@ const buildingsSlice = createSlice({
       .addCase(getAllBuildings.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload.message;
+        // state.message = action.payload.message;
       })
-      // .addCase(getAllFilteredProperties.pending, (state) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(getAllFilteredProperties.fulfilled, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isSuccess = true;
-      //   state.filteredProperties = action.payload;
-      // })
-      // .addCase(getAllFilteredProperties.rejected, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isError = true;
-      //   state.message = action.payload.message;
-      // })
-      // .addCase(getSingleProperty.pending, (state) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(getSingleProperty.fulfilled, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isSuccess = true;
-      //   state.propertyDetail = action.payload;
-      // })
-      // .addCase(getSingleProperty.rejected, (state, action) => {
-      //   state.isLoading = false;
-      //   state.isError = true;
-      //   state.message = action.payload.message;
-      // })
+      .addCase(getSingleBuilding.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getSingleBuilding.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.buildingDetail = action.payload;
+      })
+      .addCase(getSingleBuilding.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        // state.message = action.payload.message;
+      })
   },
 });
 

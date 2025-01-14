@@ -19,6 +19,10 @@ import { getAllProperties } from './redux/features/Properties/propertiesSlice';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import AllInOnePage from './pages/AllInOnePage';
+import ProjectPage from './pages/ProjectPage';
+import BuildingPage from './pages/BuildingPage';
+import ProjectDetailPage from './pages/ProjectDetailPage';
+import BuildingDetailPage from './pages/BuildingDetailPage';
 
 function App() {
   const dispatch = useDispatch()
@@ -47,10 +51,15 @@ function App() {
             <Route path='/login' element={<Login />} />
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path='/properties' element={<PropertiesPage />} />
             <Route path='/about' element={<About />} />
             <Route path='/all-in-one-page' element={<AllInOnePage />} />
-            <Route path='/api/details/:post_id' element={<SinglePage />} />
+            <Route path='/properties' element={<PropertiesPage />} />
+            <Route path='/projects' element={<ProjectPage />} />
+            <Route path='/buildings' element={<BuildingPage />} />
+
+            {/* <Route path='/api/details/project/:post_id' element={<ProjectDetailPage />} /> projects detail page */}
+          <Route path='/api/details/building/:buildingId' element={<BuildingDetailPage />} /> {/* buildings detail page */}
+            <Route path='/api/details/:post_id' element={<SinglePage />} /> {/* properties */}
             {/* <Route path='/gallery' element={<Gallery />} /> */}
           </Route>
         </Routes>
