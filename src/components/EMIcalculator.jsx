@@ -132,7 +132,7 @@ const EMICalculator = () => {
     };
 
     return (
-        <Card className="w-full max-w-2xl mt-8">
+        <Card className="w-full max-w-4xl">
             <CardHeader>
                 <CardTitle className="text-center">Home Loan EMI Calculator</CardTitle>
             </CardHeader>

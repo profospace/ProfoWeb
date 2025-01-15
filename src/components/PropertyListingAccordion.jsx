@@ -150,18 +150,6 @@ const PropertyListing = () => {
         useEffect(() => {
             setBuildingData(buildingDetail)
         }, [buildingDetail]);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await window.fs.readFile('paste.txt', { encoding: 'utf8' });
-                const data = JSON.parse(response);
-                setBuildingData(data);
-            } catch (error) {
-                console.error('Error loading data:', error);
-            }
-        };
-        fetchData();
-    }, []);
 
     if (!buildingData) {
         return <div className="p-4">Loading...</div>;
@@ -194,7 +182,10 @@ const PropertyListing = () => {
                     />
                 </div>
                 <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-lg truncate">{property.post_title}</h4>
+                    <div className='flex justify-between items-center '>
+                        <h4 className="font-semibold text-lg truncate">{property.post_title}</h4>
+                        <p className='px-2 py-[0.5px] text-sm rounded bg-yellow-200'>{property.floor + 'th floor'}</p>
+                    </div>
                     <p className="text-gray-600 text-sm mb-2 truncate">{property.address}</p>
                     <div className="flex gap-4 text-sm text-gray-600 flex-wrap">
                         {property.type_name === 'Apartment' && (
